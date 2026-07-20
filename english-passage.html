@@ -26,7 +26,7 @@
   body{
     font-family:var(--font);
     background:#fafafa;color:var(--ink);min-height:100vh;
-    -webkit-font-smoothing:antialiased;overscroll-behavior:none;
+    -webkit-font-smoothing:antialiased;overscroll-behavior:none;overflow-x:hidden;
     word-break:keep-all;
   }
 
@@ -60,7 +60,7 @@
   .dot-green{width:5px;height:5px;background:#22c55e;border-radius:50%;animation:blink 2s ease-in-out infinite;flex-shrink:0;}
   @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
   .back-btn{
-    padding:7px 14px;min-height:36px;background:transparent;
+    padding:7px 14px;min-height:36px;background:transparent;touch-action:manipulation;
     border:1.5px solid var(--border);border-radius:20px;font-family:inherit;
     font-size:12px;font-weight:600;color:var(--royal-deep);cursor:pointer;white-space:nowrap;transition:background .15s;
   }
@@ -131,6 +131,7 @@
 
   .pub-card{
     --pc:#2f55d4; --ps:#eef2fc;
+    touch-action:manipulation;
     display:flex;align-items:center;gap:11px;
     padding:11px 12px;border-radius:13px;
     background:#fff;border:1px solid var(--border-soft);
@@ -191,6 +192,9 @@
     .pub-mark{width:34px;height:34px;font-size:11px;}
     .pub-name{font-size:13px;}
     .pub-card{padding:10px;gap:9px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms!important;transition-duration:.001ms!important;}
   }
 </style>
 </head>
