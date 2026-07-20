@@ -34,7 +34,6 @@
   }
   .wrap{max-width:640px;margin:0 auto;padding:0 16px 48px;}
 
-  /* Top bar */
   .topbar{
     position:sticky;top:0;z-index:20;
     background:rgba(238,243,251,.86);
@@ -53,21 +52,18 @@
   .crumb{font-size:13px;color:var(--ink-soft);font-weight:600;flex:1 1 auto;min-width:0;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
-  /* Hero */
   .hero{padding:34px 4px 6px;animation:fade .4s ease both;}
   .eyebrow{font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--brand);text-transform:uppercase;}
   .hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(32px,8.5vw,46px);line-height:1.1;margin:8px 0 4px;color:var(--ink);}
   .hero .ko{font-size:16px;color:var(--ink-soft);font-weight:600;margin-bottom:2px;}
   .hero .src{font-size:13px;color:var(--ink-faint);}
 
-  /* Section label */
   .seclabel{
     display:flex;align-items:center;gap:8px;
     margin:30px 2px 14px;font-size:13px;font-weight:700;color:var(--ink-soft);
   }
   .seclabel::after{content:"";flex:1 1 auto;height:1px;background:var(--line);}
 
-  /* Menu cards */
   .menu{display:flex;flex-direction:column;gap:14px;}
   .card{
     display:flex;align-items:center;gap:16px;
@@ -82,8 +78,7 @@
   .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--accent,var(--brand));}
   .card:active{transform:translateY(1px) scale(.995);box-shadow:var(--shadow);border-color:var(--line-strong);}
   .card:nth-child(1){animation-delay:.05s;}
-  .card:nth-child(2){animation-delay:.11s;}
-  .card:nth-child(3){animation-delay:.17s;}
+  .card:nth-child(2){animation-delay:.12s;}
 
   .ic{
     flex:0 0 auto;width:54px;height:54px;border-radius:15px;
@@ -102,10 +97,8 @@
   .arw{flex:0 0 auto;color:var(--ink-faint);font-size:22px;font-weight:600;}
 
   .card.study{--accent:var(--brand);--accent-soft:var(--brand-soft);}
-  .card.mix{--accent:var(--good);--accent-soft:var(--good-soft);}
   .card.ctx{--accent:var(--violet);--accent-soft:var(--violet-soft);}
 
-  /* Tip */
   .tip{
     margin-top:22px;background:var(--surface-2);border:1px solid var(--line);
     border-radius:14px;padding:14px 16px;font-size:13px;color:var(--ink-soft);line-height:1.65;
@@ -157,23 +150,12 @@
       <div class="arw">›</div>
     </a>
 
-    <a class="card mix" href="high2-english1-lesson1-mix-ox.html">
-      <div class="ic">⚡</div>
-      <div class="ct">
-        <div class="step">Step 2 · 통합 OX</div>
-        <div class="ttl">통합 OX 훈련</div>
-        <div class="desc">보카 · 어법 · 어휘 · 독해 4영역을 섞어 종합 점검</div>
-        <span class="meta">26문항 · 영역 선택</span>
-      </div>
-      <div class="arw">›</div>
-    </a>
-
     <a class="card ctx" href="high2-english1-lesson1-context-ox.html">
       <div class="ic">🎯</div>
       <div class="ct">
-        <div class="step">Step 3 · 집중 훈련</div>
+        <div class="step">Step 2 · OX 훈련</div>
         <div class="ttl">문맥·어법 OX</div>
-        <div class="desc">내신 대비 어법·어휘(문맥) 판단만 집중적으로</div>
+        <div class="desc">내신 대비 어법·어휘(문맥) 판단을 집중적으로 점검</div>
         <span class="meta">40문항 · 어법 20 + 어휘 20</span>
       </div>
       <div class="arw">›</div>
@@ -185,8 +167,7 @@
     <b>추천 학습 순서</b> — 지문을 먼저 정리한 뒤 OX로 점검하면 정착이 빨라요.
     <div class="flow">
       <span class="s">📖 지문정리</span><span class="ar">→</span>
-      <span class="s">⚡ 통합 OX</span><span class="ar">→</span>
-      <span class="s">🎯 문맥·어법</span>
+      <span class="s">🎯 문맥·어법 OX</span>
     </div>
   </div>
 
