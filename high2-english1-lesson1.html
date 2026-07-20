@@ -16,6 +16,7 @@
     --brand:#2563EB; --brand-deep:#163E9E; --brand-soft:#E4EDFD;
     --good:#0E9F6E; --good-soft:#E3F6EE;
     --violet:#7C3AED; --violet-soft:#EEE7FD;
+    --amber:#B45309; --amber-soft:#FBEBD0;
     --shadow:0 10px 30px rgba(11,37,69,.10);
     --shadow-sm:0 2px 8px rgba(11,37,69,.07);
     --r:18px;
@@ -55,7 +56,7 @@
   .hero{padding:34px 4px 6px;animation:fade .4s ease both;}
   .eyebrow{font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--brand);text-transform:uppercase;}
   .hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(32px,8.5vw,46px);line-height:1.1;margin:8px 0 4px;color:var(--ink);}
-  .hero .ko{font-size:16px;color:var(--ink-soft);font-weight:600;margin-bottom:2px;}
+  .hero h1 .ko-in{font-family:var(--sans);font-size:clamp(15px,4.2vw,18px);font-weight:600;color:var(--ink-soft);letter-spacing:0;white-space:nowrap;}
   .hero .src{font-size:13px;color:var(--ink-faint);}
 
   .seclabel{
@@ -78,7 +79,9 @@
   .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--accent,var(--brand));}
   .card:active{transform:translateY(1px) scale(.995);box-shadow:var(--shadow);border-color:var(--line-strong);}
   .card:nth-child(1){animation-delay:.05s;}
-  .card:nth-child(2){animation-delay:.12s;}
+  .card:nth-child(2){animation-delay:.11s;}
+  .card:nth-child(3){animation-delay:.17s;}
+  .card:nth-child(4){animation-delay:.23s;}
 
   .ic{
     flex:0 0 auto;width:54px;height:54px;border-radius:15px;
@@ -97,7 +100,9 @@
   .arw{flex:0 0 auto;color:var(--ink-faint);font-size:22px;font-weight:600;}
 
   .card.study{--accent:var(--brand);--accent-soft:var(--brand-soft);}
+  .card.voca{--accent:var(--good);--accent-soft:var(--good-soft);}
   .card.ctx{--accent:var(--violet);--accent-soft:var(--violet-soft);}
+  .card.read{--accent:var(--amber);--accent-soft:var(--amber-soft);}
 
   .tip{
     margin-top:22px;background:var(--surface-2);border:1px solid var(--line);
@@ -130,8 +135,7 @@
 
   <div class="hero">
     <div class="eyebrow">Lesson 1</div>
-    <h1>A Spark in You</h1>
-    <div class="ko">네 안의 가능성</div>
+    <h1>A Spark in You <span class="ko-in">(네 안의 가능성)</span></h1>
     <div class="src">능률(NE) 고2 영어1</div>
   </div>
 
@@ -150,10 +154,21 @@
       <div class="arw">›</div>
     </a>
 
+    <a class="card voca" href="high2-english1-lesson1-voca.html">
+      <div class="ic">📘</div>
+      <div class="ct">
+        <div class="step">Step 2 · 어휘·표현</div>
+        <div class="ttl">필수 어휘 &amp; 핵심 표현 OX</div>
+        <div class="desc">본문 필수 어휘와 핵심 표현의 뜻을 OX로 점검</div>
+        <span class="meta">25문항 · 어휘 14 + 표현 11</span>
+      </div>
+      <div class="arw">›</div>
+    </a>
+
     <a class="card ctx" href="high2-english1-lesson1-context-ox.html">
       <div class="ic">🎯</div>
       <div class="ct">
-        <div class="step">Step 2 · OX 훈련</div>
+        <div class="step">Step 3 · 문맥·어법</div>
         <div class="ttl">문맥·어법 OX</div>
         <div class="desc">내신 대비 어법·어휘(문맥) 판단을 집중적으로 점검</div>
         <span class="meta">40문항 · 어법 20 + 어휘 20</span>
@@ -161,13 +176,26 @@
       <div class="arw">›</div>
     </a>
 
+    <a class="card read" href="high2-english1-lesson1-sentence.html">
+      <div class="ic">🔍</div>
+      <div class="ct">
+        <div class="step">Step 4 · 독해</div>
+        <div class="ttl">독해 내용 OX</div>
+        <div class="desc">「A Spark in You」 내용 이해도를 OX로 확인</div>
+        <span class="meta">20문항 · 내용 일치</span>
+      </div>
+      <div class="arw">›</div>
+    </a>
+
   </nav>
 
   <div class="tip">
-    <b>추천 학습 순서</b> — 지문을 먼저 정리한 뒤 OX로 점검하면 정착이 빨라요.
+    <b>추천 학습 순서</b> — 지문을 먼저 정리한 뒤 어휘·어법·독해 순으로 점검하면 정착이 빨라요.
     <div class="flow">
       <span class="s">📖 지문정리</span><span class="ar">→</span>
-      <span class="s">🎯 문맥·어법 OX</span>
+      <span class="s">📘 어휘·표현</span><span class="ar">→</span>
+      <span class="s">🎯 문맥·어법</span><span class="ar">→</span>
+      <span class="s">🔍 독해</span>
     </div>
   </div>
 
