@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Lesson 1 · A Spark in You — 문맥·어법 OX 40제</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" />
+<style>
+  :root{
+    --bg:#EEF3FB; --surface:#FFFFFF; --surface-2:#F6F9FE;
+    --ink:#0B2545; --ink-soft:#4A5B7A; --ink-faint:#8A99B5;
+    --line:#DCE5F2; --line-strong:#C6D4EA;
+    --brand:#2563EB; --brand-deep:#163E9E; --brand-soft:#E4EDFD;
+    --o:#2563EB; --x:#475569;
+    --good:#0E9F6E; --good-soft:#E3F6EE;
+    --bad:#E11D48; --bad-soft:#FCE7EC;
+    --shadow:0 10px 30px rgba(11,37,69,.10);
+    --shadow-sm:0 2px 8px rgba(11,37,69,.07);
+    --r:18px;
+    --sans:"Pretendard",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    --serif:"Newsreader",Georgia,serif;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:var(--sans);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:0 16px 48px;}
+
+  /* Top bar */
+  .topbar{
+    position:sticky;top:0;z-index:20;
+    background:rgba(238,243,251,.86);
+    backdrop-filter:saturate(1.4) blur(10px);
+    -webkit-backdrop-filter:saturate(1.4) blur(10px);
+    padding:12px 16px 10px;
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:10px;}
+  .back{
+    display:inline-flex;align-items:center;gap:4px;
+    color:var(--brand-deep);text-decoration:none;font-weight:600;font-size:14px;
+    padding:6px 10px;border-radius:10px;flex:0 0 auto;
+  }
+  .back:active{background:var(--brand-soft);}
+  .crumb{font-size:13px;color:var(--ink-soft);font-weight:600;flex:1 1 auto;min-width:0;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .counter{font-size:13px;color:var(--ink-faint);font-weight:700;flex:0 0 auto;font-variant-numeric:tabular-nums;}
+  .progress{height:5px;background:var(--line);border-radius:99px;margin-top:10px;overflow:hidden;max-width:640px;margin-left:auto;margin-right:auto;}
+  .progress-inner{height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand-deep));border-radius:99px;transition:width .35s cubic-bezier(.4,0,.2,1);}
+
+  /* Screens */
+  .screen{display:none;animation:fade .35s ease both;}
+  .screen.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+  /* Start screen */
+  .hero{padding:34px 4px 8px;}
+  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--brand);text-transform:uppercase;}
+  .hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,8vw,44px);line-height:1.12;margin:8px 0 4px;color:var(--ink);}
+  .hero .ko{font-size:16px;color:var(--ink-soft);font-weight:600;margin-bottom:2px;}
+  .hero .src{font-size:13px;color:var(--ink-faint);}
+
+  .field{margin-top:26px;}
+  .field-label{font-size:13px;font-weight:700;color:var(--ink-soft);margin-bottom:10px;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{
+    appearance:none;border:1.5px solid var(--line-strong);background:var(--surface);
+    color:var(--ink-soft);font-family:inherit;font-weight:600;font-size:14px;
+    padding:9px 16px;border-radius:99px;cursor:pointer;transition:.15s;
+  }
+  .chip .n{font-size:12px;color:var(--ink-faint);margin-left:5px;font-weight:700;}
+  .chip[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff;box-shadow:var(--shadow-sm);}
+  .chip[aria-pressed="true"] .n{color:rgba(255,255,255,.8);}
+
+  .startbtn{
+    margin-top:30px;width:100%;border:none;cursor:pointer;font-family:inherit;
+    background:linear-gradient(180deg,var(--brand),var(--brand-deep));
+    color:#fff;font-weight:700;font-size:17px;padding:17px;border-radius:16px;
+    box-shadow:0 8px 20px rgba(37,99,235,.30);transition:transform .12s,box-shadow .2s;
+  }
+  .startbtn:active{transform:translateY(1px);box-shadow:0 4px 12px rgba(37,99,235,.28);}
+
+  .legend{margin-top:18px;font-size:13px;color:var(--ink-faint);line-height:1.7;}
+  .legend b{color:var(--ink-soft);}
+
+  /* Question card */
+  .qwrap{padding-top:22px;}
+  .qcard{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+    box-shadow:var(--shadow);padding:24px 22px 26px;position:relative;overflow:hidden;
+  }
+  .cat{
+    display:inline-block;font-size:12px;font-weight:800;letter-spacing:.03em;
+    color:var(--brand-deep);background:var(--brand-soft);
+    padding:5px 12px;border-radius:99px;margin-bottom:16px;
+  }
+  .prompt{font-size:13.5px;color:var(--ink-faint);font-weight:600;margin-bottom:16px;}
+  .stmt-en{font-family:var(--serif);font-size:clamp(20px,5.2vw,26px);line-height:1.45;color:var(--ink);font-weight:500;letter-spacing:-.01em;}
+  .stmt-en em{font-style:italic;color:var(--brand-deep);font-weight:600;}
+  .stmt-ko{font-size:clamp(17px,4.6vw,20px);line-height:1.55;color:var(--ink);font-weight:600;margin-top:2px;}
+
+  /* OX buttons */
+  .ox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;}
+  .oxbtn{
+    appearance:none;cursor:pointer;font-family:var(--serif);
+    border:2px solid var(--line-strong);background:var(--surface-2);
+    border-radius:16px;padding:22px 8px 18px;text-align:center;transition:.14s;
+    display:flex;flex-direction:column;align-items:center;gap:2px;
+  }
+  .oxbtn .mark{font-size:40px;line-height:1;font-weight:600;}
+  .oxbtn .lab{font-family:var(--sans);font-size:12px;font-weight:700;color:var(--ink-faint);letter-spacing:.02em;}
+  .oxbtn.o{color:var(--o);}
+  .oxbtn.x{color:var(--x);}
+  .oxbtn.o:active{background:var(--brand-soft);border-color:var(--o);}
+  .oxbtn.x:active{background:#EEF1F6;border-color:var(--x);}
+  .oxbtn:disabled{cursor:default;opacity:.5;}
+  .oxbtn.chosen{opacity:1;box-shadow:var(--shadow-sm);}
+  .oxbtn.o.chosen{border-color:var(--o);background:var(--brand-soft);}
+  .oxbtn.x.chosen{border-color:var(--x);background:#EDF0F5;}
+
+  /* Grading stamp */
+  .stamp{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-14deg) scale(.4);
+    opacity:0;pointer-events:none;z-index:5;
+    border:4px solid;border-radius:14px;padding:6px 18px;
+    font-family:var(--sans);font-weight:900;font-size:34px;letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  .stamp.show{animation:stampin .5s cubic-bezier(.2,1.3,.4,1) forwards;}
+  .stamp.good{color:var(--good);border-color:var(--good);}
+  .stamp.bad{color:var(--bad);border-color:var(--bad);}
+  @keyframes stampin{
+    0%{opacity:0;transform:translate(-50%,-50%) rotate(-14deg) scale(1.7);}
+    60%{opacity:1;transform:translate(-50%,-50%) rotate(-14deg) scale(.92);}
+    100%{opacity:.14;transform:translate(-50%,-50%) rotate(-14deg) scale(1);}
+  }
+
+  /* Reveal */
+  .reveal{margin-top:18px;border-radius:14px;padding:16px 16px;font-size:14.5px;line-height:1.65;
+    border:1px solid var(--line);background:var(--surface-2);display:none;animation:fade .3s ease both;}
+  .reveal.show{display:block;}
+  .reveal.correct{background:var(--good-soft);border-color:#BFE9D5;}
+  .reveal.wrong{background:var(--bad-soft);border-color:#F6C9D3;}
+  .reveal .verdict{font-weight:800;font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:7px;}
+  .reveal.correct .verdict{color:var(--good);}
+  .reveal.wrong .verdict{color:var(--bad);}
+  .reveal .ex{color:var(--ink);}
+  .reveal .fix{margin-top:9px;padding-top:9px;border-top:1px dashed var(--line-strong);color:var(--ink-soft);font-size:13.5px;}
+  .reveal .fix b{color:var(--ink);}
+  .reveal .fix .en{font-family:var(--serif);font-style:italic;}
+
+  .nextbtn{
+    margin-top:14px;width:100%;border:none;cursor:pointer;font-family:inherit;display:none;
+    background:var(--ink);color:#fff;font-weight:700;font-size:16px;padding:15px;border-radius:14px;transition:transform .12s;
+  }
+  .nextbtn.show{display:block;}
+  .nextbtn:active{transform:translateY(1px);}
+
+  /* Result */
+  .result{padding-top:26px;text-align:center;}
+  .result .ring{width:150px;height:150px;margin:6px auto 4px;position:relative;}
+  .result .ring svg{transform:rotate(-90deg);}
+  .result .ring .pct{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .result .ring .pct b{font-size:38px;font-weight:800;color:var(--ink);line-height:1;font-variant-numeric:tabular-nums;}
+  .result .ring .pct span{font-size:12px;color:var(--ink-faint);font-weight:700;margin-top:3px;}
+  .result h2{font-family:var(--serif);font-weight:600;font-size:26px;margin:14px 0 4px;}
+  .result .sub{color:var(--ink-soft);font-size:15px;margin-bottom:22px;}
+  .result .sub b{color:var(--brand-deep);}
+  .breakdown{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:8px 18px;box-shadow:var(--shadow-sm);}
+  .brow{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);}
+  .brow:last-child{border-bottom:none;}
+  .brow .name{font-weight:700;font-size:14px;width:52px;flex:0 0 auto;color:var(--ink);}
+  .bar{flex:1 1 auto;height:9px;background:var(--line);border-radius:99px;overflow:hidden;}
+  .bar span{display:block;height:100%;background:linear-gradient(90deg,var(--brand),var(--brand-deep));border-radius:99px;}
+  .brow .score{font-size:13px;font-weight:700;color:var(--ink-soft);flex:0 0 auto;font-variant-numeric:tabular-nums;width:48px;text-align:right;}
+  .result-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px;}
+  .btn-ghost,.btn-solid{border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:15px;padding:15px;border-radius:14px;transition:transform .12s;}
+  .btn-ghost{background:var(--surface);border:1.5px solid var(--line-strong);color:var(--ink);}
+  .btn-solid{background:linear-gradient(180deg,var(--brand),var(--brand-deep));color:#fff;box-shadow:0 6px 16px rgba(37,99,235,.28);}
+  .btn-ghost:active,.btn-solid:active{transform:translateY(1px);}
+  .btn-ghost:disabled{opacity:.4;cursor:default;}
+  .hub-link{display:inline-block;margin-top:18px;color:var(--brand-deep);font-weight:600;font-size:14px;text-decoration:none;}
+
+  .kbd-hint{margin-top:16px;font-size:12px;color:var(--ink-faint);text-align:center;}
+  .kbd-hint kbd{font-family:var(--sans);background:var(--surface);border:1px solid var(--line-strong);border-bottom-width:2px;border-radius:6px;padding:1px 7px;font-size:11px;font-weight:700;color:var(--ink-soft);}
+
+  @media (min-width:560px){ .kbd-hint{display:block;} }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms!important;transition-duration:.001ms!important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="back" href="high2-ne-passage.html" aria-label="목록으로">‹ 목록</a>
+    <div class="crumb">능률 영어1 · Lesson 1 · 문맥·어법</div>
+    <div class="counter" id="counter"></div>
+  </div>
+  <div class="progress"><div class="progress-inner" id="progressBar"></div></div>
+</div>
+
+<div class="wrap">
+
+  <!-- START -->
+  <section class="screen active" id="startScreen">
+    <div class="hero">
+      <div class="eyebrow">Lesson 1 · Can I Swim?</div>
+      <h1>A Spark in You</h1>
+      <div class="ko">문맥·어법 판단 OX</div>
+      <div class="src">능률(NE) 고2 영어1 · 어법 20 + 어휘 20 = 40제</div>
+    </div>
+
+    <div class="field">
+      <div class="field-label">영역 선택</div>
+      <div class="chips" id="catChips"></div>
+    </div>
+
+    <button class="startbtn" id="startBtn">시작하기</button>
+
+    <div class="legend">
+      <b>O</b> 매끄럽다·자연스럽다 &nbsp;·&nbsp; <b>X</b> 어색하다·틀리다<br />
+      <b>어법</b>(문법이 매끄러운지) · <b>어휘</b>(문맥상 자연스러운지)만 다룹니다.<br />
+      틀린 문장은 아래에 <b>이유와 교정</b>이 나옵니다.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="screen" id="quizScreen">
+    <div class="qwrap">
+      <div class="qcard">
+        <div class="stamp" id="stamp"></div>
+        <span class="cat" id="qCat"></span>
+        <div class="prompt" id="qPrompt"></div>
+        <div id="qBody"></div>
+
+        <div class="ox">
+          <button class="oxbtn o" id="btnO"><span class="mark">O</span><span class="lab">맞다</span></button>
+          <button class="oxbtn x" id="btnX"><span class="mark">X</span><span class="lab">틀리다</span></button>
+        </div>
+
+        <div class="reveal" id="reveal">
+          <div class="verdict" id="verdict"></div>
+          <div class="ex" id="exText"></div>
+          <div class="fix" id="fixText" style="display:none"></div>
+        </div>
+        <button class="nextbtn" id="nextBtn">다음 문제 ›</button>
+      </div>
+      <div class="kbd-hint">키보드: <kbd>O</kbd> 맞다 · <kbd>X</kbd> 틀리다 · <kbd>Enter</kbd> 다음</div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section class="screen" id="resultScreen">
+    <div class="result">
+      <div class="ring">
+        <svg width="150" height="150" viewBox="0 0 150 150">
+          <circle cx="75" cy="75" r="66" fill="none" stroke="var(--line)" stroke-width="12"/>
+          <circle id="ringFill" cx="75" cy="75" r="66" fill="none" stroke="var(--brand)" stroke-width="12"
+                  stroke-linecap="round" stroke-dasharray="414.7" stroke-dashoffset="414.7"/>
+        </svg>
+        <div class="pct"><b id="pctNum">0</b><span>정답률</span></div>
+      </div>
+      <h2 id="resultTitle">수고했어요!</h2>
+      <div class="sub" id="resultSub"></div>
+      <div class="breakdown" id="breakdown"></div>
+      <div class="result-actions">
+        <button class="btn-ghost" id="retryWrong">오답만 다시</button>
+        <button class="btn-solid" id="retryAll">처음부터</button>
+      </div>
+      <a class="hub-link" href="high2-ne-passage.html">‹ 다른 레슨 보기</a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---------- Prompts ----------
+  var PROMPTS = {
+    "어법":"어법상 매끄러운 문장이면 O, 틀리면 X",
+    "어휘":"문맥상 자연스러운 문장이면 O, 어색하면 X"
+  };
+
+  // a:true  => 옳음(정답 O) / a:false => 틀림(정답 X)
+  var QUESTIONS = [
+    // ===== 어법 (문법적으로 매끄러운지) =====
+    {cat:"어법",
+      en:"Diego was a shy boy who seemed to be frightened of his own shadow.",
+      a:true,
+      ex:"관계대명사 who가 주어 역할을 하고, seem to be(~인 것 같다)도 올바른 형태입니다."},
+
+    {cat:"어법",
+      en:"He was neither strong or athletic.",
+      a:false,
+      ex:"상관접속사 neither의 짝은 nor입니다. neither A or B는 틀린 형태입니다.",
+      fix:"or → <b>nor</b> &nbsp;·&nbsp; <span class='en'>He was neither strong nor athletic.</span>"},
+
+    {cat:"어법",
+      en:"Diego\u2019s early education had not prepared him good for life at his new school.",
+      a:false,
+      ex:"동사 prepared를 꾸미려면 부사가 필요합니다. good은 형용사이므로 부사 well이 맞습니다.",
+      fix:"good → <b>well</b>"},
+
+    {cat:"어법",
+      en:"Juan Salvado had been living at the school for several months by then.",
+      a:true,
+      ex:"과거 시점(by then)까지 계속된 일을 나타내는 과거완료진행(had been living)으로 올바릅니다."},
+
+    {cat:"어법",
+      en:"He had never been able to swim because his feathers had been damaging.",
+      a:false,
+      ex:"깃털은 \u2018손상된\u2019 대상이므로 수동태여야 합니다. had been damaging(능동)은 틀립니다.",
+      fix:"damaging → <b>damaged</b> &nbsp;·&nbsp; <span class='en'>his feathers had been damaged</span>"},
+
+    {cat:"어법",
+      en:"Not only Diego could swim, but he swam magnificently!",
+      a:false,
+      ex:"부정어구 Not only가 문장 앞에 오면 주어와 조동사가 도치되어야 합니다.",
+      fix:"<span class='en'>Not only could Diego swim, but he swam magnificently!</span>"},
+
+    {cat:"어법",
+      en:"Without hesitating, he dived into the cold water.",
+      a:true,
+      ex:"전치사 Without 뒤에는 동명사가 옵니다. hesitating으로 올바릅니다."},
+
+    {cat:"어법",
+      en:"It was the first time he has talked about his life.",
+      a:false,
+      ex:"주절이 과거(was)이고 그보다 앞선 일이므로 과거완료 had talked가 맞습니다. 현재완료 has talked는 시제가 어긋납니다.",
+      fix:"has talked → <b>had talked</b>"},
+
+    {cat:"어법",
+      en:"Diego told me that his father had taught him how to swim in the river by their home.",
+      a:true,
+      ex:"주절 과거(told)보다 더 이전의 일을 대과거(had taught)로 나타냈고, how to swim도 올바릅니다."},
+
+    {cat:"어법",
+      en:"Looking after Juan Salvado were good for those boys.",
+      a:false,
+      ex:"동명사 주어(Looking after ~)는 단수 취급하므로 동사는 was입니다.",
+      fix:"were → <b>was</b>"},
+
+    {cat:"어법",
+      en:"He struggled with his classes, and none of the after-school activities seemed to suit him.",
+      a:true,
+      ex:"none of ~ 뒤의 동사 seemed와 to suit(~에게 맞다) 모두 어법상 옳습니다."},
+
+    {cat:"어법",
+      en:"He had some friends who also had trouble to fit in.",
+      a:false,
+      ex:"have trouble 뒤에는 동명사(v-ing)가 옵니다. to fit은 틀립니다.",
+      fix:"to fit → <b>fitting</b> &nbsp;·&nbsp; <span class='en'>had trouble fitting in</span>"},
+
+    {cat:"어법",
+      en:"As soon as the other swimmers left, we brought Juan Salvado to the water to see if would he swim.",
+      a:false,
+      ex:"if가 이끄는 간접의문문은 도치하지 않고 \u2018주어+동사\u2019 어순을 지킵니다.",
+      fix:"if would he swim → <b>if he would swim</b>"},
+
+    {cat:"어법",
+      en:"I had never had the opportunity to study a penguin in the water before.",
+      a:true,
+      ex:"과거 이전에 경험이 없었음을 과거완료(had never had)로 나타냈고, opportunity to study도 올바릅니다."},
+
+    {cat:"어법",
+      en:"Everyone could see how much was he enjoying himself.",
+      a:false,
+      ex:"how much가 이끄는 간접의문문도 도치하지 않고 \u2018주어+동사\u2019 어순이어야 합니다.",
+      fix:"how much was he → <b>how much he was</b> enjoying himself"},
+
+    {cat:"어법",
+      en:"The boys shouted, as though they was watching a fireworks display.",
+      a:false,
+      ex:"주어 they는 복수이므로 be동사는 were입니다.",
+      fix:"was → <b>were</b>"},
+
+    {cat:"어법",
+      en:"His eyes were shining with joy, and he seemed to be truly alive for the first time.",
+      a:true,
+      ex:"seem 뒤에 to be가 오는 형태로 올바르며, 진행형 were shining도 자연스럽습니다."},
+
+    {cat:"어법",
+      en:"I was ready to jump in and rescue him if he could not to swim.",
+      a:false,
+      ex:"조동사 could 뒤에는 동사원형이 옵니다. to는 필요 없습니다.",
+      fix:"could not to swim → <b>could not swim</b>"},
+
+    {cat:"어법",
+      en:"Sometimes Juan Salvado took the lead and Diego followed after him.",
+      a:true,
+      ex:"과거시제 took, followed가 병렬 구조로 올바르게 쓰였습니다."},
+
+    {cat:"어법",
+      en:"The ugly duckling had became a swan.",
+      a:false,
+      ex:"과거완료는 \u2018had + 과거분사\u2019입니다. become의 과거분사는 become이며, became은 과거형입니다.",
+      fix:"had became → <b>had become</b>"},
+
+    // ===== 어휘 (문맥상 자연스러운지) =====
+    {cat:"어휘",
+      en:"His knowledge of English was limited, so he <em>encouraged</em> conversation.",
+      a:false,
+      ex:"영어 실력이 부족하면 대화를 \u2018피하는\u2019 것이 자연스럽습니다. encouraged(장려했다)는 문맥과 모순됩니다.",
+      fix:"encouraged → <b>avoided</b> (대화를 피했다)"},
+
+    {cat:"어휘",
+      en:"On the rugby field, nobody passed the ball to him, <em>except</em> to make fun of him.",
+      a:true,
+      ex:"아무도 공을 주지 않고 오직 놀리기만 했다는 흐름에서 except(~을 제외하고)가 자연스럽습니다."},
+
+    {cat:"어휘",
+      en:"I knew the awkward way he walked on land, but now I watched <em>in boredom</em>.",
+      a:false,
+      ex:"물속에서 멋지게 헤엄치는 모습을 보는 장면이므로 in awe(경외하며)가 자연스럽습니다. in boredom(지루하게)은 모순됩니다.",
+      fix:"in boredom → <b>in awe</b> (경외하며)"},
+
+    {cat:"어휘",
+      en:"With a single movement of his wings, he flew <em>like an arrow</em> across the water.",
+      a:true,
+      ex:"날개 한 번에 빠르게 나아가는 모습을 화살(like an arrow)에 비유한 것이 자연스럽습니다."},
+
+    {cat:"어휘",
+      en:"I was astonished. He had never gone near the pool before, so it was <em>completely expected</em>.",
+      a:false,
+      ex:"전에 수영장 근처에도 안 갔는데 나섰으니 \u2018예상 밖\u2019이어야 합니다. completely expected(충분히 예상됨)는 astonished와 모순됩니다.",
+      fix:"completely expected → <b>totally unexpected</b> (전혀 예상 못함)"},
+
+    {cat:"어휘",
+      en:"He chased after Juan Salvado, and they swam <em>in perfect harmony</em>.",
+      a:true,
+      ex:"펭귄을 따라 나란히 헤엄치는 모습이므로 in perfect harmony(완벽한 조화 속에)가 자연스럽습니다."},
+
+    {cat:"어휘",
+      en:"Diego was not the sad little boy anymore. He was a normal boy with <em>no talent at all</em>.",
+      a:false,
+      ex:"수영에 뛰어난 재능을 보인 흐름이므로 \u2018특별한 재능\u2019이 맞습니다. no talent at all(재능이 전혀 없는)은 모순됩니다.",
+      fix:"no talent at all → <b>a very special talent</b>"},
+
+    {cat:"어휘",
+      en:"Diego\u2019s <em>confidence</em> grew quickly after that day.",
+      a:true,
+      ex:"수영 실력을 인정받은 뒤의 변화이므로 confidence(자신감)가 커졌다는 것이 자연스럽습니다."},
+
+    {cat:"어휘",
+      en:"He <em>lost</em> every race he participated in, and earned the respect of his classmates.",
+      a:false,
+      ex:"참가한 모든 경기에서 \u2018우승\u2019했기에 존경을 받은 것입니다. lost(졌다)는 뒤 내용과 모순됩니다.",
+      fix:"lost → <b>won</b> (모든 경기에서 우승했다)"},
+
+    {cat:"어휘",
+      en:"Over the next few weeks, his grades <em>improved</em> and he became more popular.",
+      a:true,
+      ex:"자신감이 커진 뒤의 긍정적 변화이므로 grades improved(성적이 올랐다)가 자연스럽습니다."},
+
+    {cat:"어휘",
+      en:"Diego was a shy boy who seemed to be <em>frightened</em> of his own shadow.",
+      a:true,
+      ex:"수줍고 소심한 아이라는 흐름에서 자기 그림자에도 \u2018겁먹은(frightened)\u2019 모습이 자연스럽습니다."},
+
+    {cat:"어휘",
+      en:"Diego enjoyed the company of Juan Salvado; on the terrace, he felt <em>more anxious than ever</em>.",
+      a:false,
+      ex:"펭귄과 함께 있을 때 \u2018편안함을 느꼈다\u2019는 흐름이므로 anxious(불안한)는 모순됩니다.",
+      fix:"more anxious than ever → <b>relaxed</b> (편안함을 느꼈다)"},
+
+    {cat:"어휘",
+      en:"Juan Salvado could not swim because his feathers had been <em>damaged</em>.",
+      a:true,
+      ex:"깃털이 \u2018손상되어\u2019 수영을 못 했다는 인과관계가 자연스럽습니다."},
+
+    {cat:"어휘",
+      en:"He knocked into the wall on the opposite side. <em>Sadly</em>, he was seriously hurt.",
+      a:false,
+      ex:"벽에 부딪혔지만 \u2018다행히 다치지 않았다\u2019는 흐름이므로 Luckily가 맞습니다. Sadly와 seriously hurt는 모순됩니다.",
+      fix:"Sadly … seriously hurt → <b>Luckily … not hurt</b> (다행히 다치지 않았다)"},
+
+    {cat:"어휘",
+      en:"I was familiar with the <em>awkward</em> way that Juan Salvado walked on land.",
+      a:true,
+      ex:"펭귄이 땅 위에서 \u2018어색하게\u2019 걷는 모습을 나타내는 awkward가 자연스럽습니다."},
+
+    {cat:"어휘",
+      en:"\u201cOoh! Aah!\u201d The boys shouted, as though they were <em>completely bored</em>.",
+      a:false,
+      ex:"불꽃놀이를 보듯 감탄하며 소리치는 장면이므로 bored(지루한)는 모순됩니다.",
+      fix:"completely bored → <b>watching a fireworks display</b> (신나서 감탄하며)"},
+
+    {cat:"어휘",
+      en:"I had never seen him so <em>excited</em> before; his eyes were shining with joy.",
+      a:true,
+      ex:"눈이 기쁨으로 빛났다는 뒷문장과 이어지므로 excited(신난)가 자연스럽습니다."},
+
+    {cat:"어휘",
+      en:"I listened in silence, <em>correcting every mistake</em> in his English, as he talked nonstop.",
+      a:false,
+      ex:"\u2018조용히, 교정하지 않고\u2019 들어 주었다는 흐름이므로 correcting every mistake는 모순됩니다.",
+      fix:"correcting every mistake → <b>without making any corrections</b> (교정하지 않고)"},
+
+    {cat:"어휘",
+      en:"The events of that day were <em>extraordinary</em>; a lonely boy\u2019s life was changed forever.",
+      a:true,
+      ex:"외롭던 아이의 인생이 완전히 바뀐 하루이므로 extraordinary(놀라운)가 자연스럽습니다."},
+
+    {cat:"어휘",
+      en:"He had earned the respect of his classmates, so they <em>continued to make fun of him</em>.",
+      a:false,
+      ex:"반 친구들의 \u2018존경을 얻었다\u2019는 흐름이므로 계속 놀렸다는 것은 모순됩니다.",
+      fix:"continued to make fun of him → <b>respected him</b> (그를 존중했다)"}
+  ];
+
+  // ---------- State ----------
+  var order = [];
+  var pos = 0;
+  var results = [];
+  var activeCat = "전체";
+  var locked = false;
+
+  // ---------- Elements ----------
+  var $ = function(id){ return document.getElementById(id); };
+  var screens = {start:$("startScreen"), quiz:$("quizScreen"), result:$("resultScreen")};
+  var catChips = $("catChips");
+
+  var CATS = ["전체","어법","어휘"];
+
+  function countCat(c){
+    if(c==="전체") return QUESTIONS.length;
+    var n=0; for(var i=0;i<QUESTIONS.length;i++){ if(QUESTIONS[i].cat===c) n++; }
+    return n;
+  }
+
+  CATS.forEach(function(c){
+    var b=document.createElement("button");
+    b.className="chip";
+    b.setAttribute("aria-pressed", c==="전체" ? "true":"false");
+    b.dataset.cat=c;
+    b.innerHTML = c + '<span class="n">'+countCat(c)+'</span>';
+    b.addEventListener("click", function(){
+      activeCat=c;
+      Array.prototype.forEach.call(catChips.children,function(x){
+        x.setAttribute("aria-pressed", x.dataset.cat===c ? "true":"false");
+      });
+    });
+    catChips.appendChild(b);
+  });
+
+  function show(name){
+    for(var k in screens){ screens[k].classList.remove("active"); }
+    screens[name].classList.add("active");
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+
+  function shuffle(arr){
+    for(var i=arr.length-1;i>0;i--){
+      var j=Math.floor(Math.random()*(i+1));
+      var t=arr[i]; arr[i]=arr[j]; arr[j]=t;
+    }
+    return arr;
+  }
+
+  function buildOrder(cat){
+    var idxs=[];
+    for(var i=0;i<QUESTIONS.length;i++){
+      if(cat==="전체" || QUESTIONS[i].cat===cat) idxs.push(i);
+    }
+    return shuffle(idxs);
+  }
+
+  function startRun(idxs){
+    order = idxs;
+    pos = 0;
+    results = [];
+    locked = false;
+    show("quiz");
+    renderQuestion();
+  }
+
+  function updateProgress(){
+    var total=order.length;
+    var frac= total ? (pos)/total : 0;
+    $("progressBar").style.width = (frac*100)+"%";
+    $("counter").textContent = (pos+1)+" / "+total;
+  }
+
+  function renderQuestion(){
+    locked=false;
+    var q=QUESTIONS[order[pos]];
+    updateProgress();
+
+    $("qCat").textContent = q.cat;
+    $("qPrompt").textContent = PROMPTS[q.cat] || "맞으면 O, 틀리면 X";
+
+    var body="";
+    if(q.en){
+      body = '<div class="stmt-en">'+q.en+'</div>';
+      if(q.ko){ body += '<div class="stmt-ko">'+q.ko+'</div>'; }
+    } else {
+      body = '<div class="stmt-ko">'+q.ko+'</div>';
+    }
+    $("qBody").innerHTML = body;
+
+    var btnO=$("btnO"), btnX=$("btnX");
+    btnO.disabled=false; btnX.disabled=false;
+    btnO.classList.remove("chosen"); btnX.classList.remove("chosen");
+    var stamp=$("stamp"); stamp.className="stamp"; stamp.textContent="";
+    var rev=$("reveal"); rev.className="reveal";
+    $("nextBtn").classList.remove("show");
+  }
+
+  function answer(choiceIsO){
+    if(locked) return;
+    locked=true;
+    var q=QUESTIONS[order[pos]];
+    var correct = (choiceIsO === q.a);
+    results.push({idx:order[pos], chosen:choiceIsO, correct:correct});
+
+    var btnO=$("btnO"), btnX=$("btnX");
+    btnO.disabled=true; btnX.disabled=true;
+    (choiceIsO?btnO:btnX).classList.add("chosen");
+
+    var stamp=$("stamp");
+    stamp.textContent = correct ? "정답" : "오답";
+    stamp.className = "stamp show " + (correct?"good":"bad");
+
+    var rev=$("reveal");
+    rev.className = "reveal show " + (correct?"correct":"wrong");
+    $("verdict").innerHTML = correct
+      ? '<span>✓</span> 정답 &nbsp;·&nbsp; 답은 '+(q.a?"O":"X")
+      : '<span>✕</span> 오답 &nbsp;·&nbsp; 답은 '+(q.a?"O":"X");
+    $("exText").innerHTML = q.ex || "";
+    var fix=$("fixText");
+    if(q.fix){ fix.style.display="block"; fix.innerHTML='<b>정리&nbsp;·&nbsp;</b>'+q.fix; }
+    else { fix.style.display="none"; fix.innerHTML=""; }
+
+    $("nextBtn").classList.add("show");
+  }
+
+  function next(){
+    if(pos < order.length-1){
+      pos++;
+      renderQuestion();
+    } else {
+      showResult();
+    }
+  }
+
+  function showResult(){
+    $("progressBar").style.width="100%";
+    $("counter").textContent = order.length+" / "+order.length;
+
+    var total=results.length;
+    var correctN=0;
+    var byCat={};
+    for(var i=0;i<results.length;i++){
+      var r=results[i];
+      var c=QUESTIONS[r.idx].cat;
+      if(!byCat[c]) byCat[c]={c:0,t:0};
+      byCat[c].t++;
+      if(r.correct){ correctN++; byCat[c].c++; }
+    }
+    var pct = total ? Math.round(correctN/total*100) : 0;
+
+    var circ=414.7;
+    $("ringFill").style.strokeDashoffset = circ*(1-pct/100);
+    var col = pct>=80?"var(--good)":(pct>=50?"var(--brand)":"var(--bad)");
+    $("ringFill").setAttribute("stroke", col);
+
+    var n=0; var target=pct;
+    var timer=setInterval(function(){
+      n += Math.max(1, Math.round(target/22));
+      if(n>=target){ n=target; clearInterval(timer); }
+      $("pctNum").textContent=n;
+    }, 24);
+
+    $("resultTitle").textContent =
+      pct>=80 ? "훌륭해요! 🎯" : pct>=50 ? "잘했어요, 조금만 더!" : "다시 한 번 도전!";
+    $("resultSub").innerHTML = "총 "+total+"문제 중 <b>"+correctN+"문제</b> 정답";
+
+    var order2=["어법","어휘"];
+    var html="";
+    order2.forEach(function(c){
+      if(!byCat[c]) return;
+      var d=byCat[c];
+      var p=Math.round(d.c/d.t*100);
+      html += '<div class="brow"><span class="name">'+c+'</span>'+
+              '<span class="bar"><span style="width:'+p+'%"></span></span>'+
+              '<span class="score">'+d.c+'/'+d.t+'</span></div>';
+    });
+    $("breakdown").innerHTML = html;
+
+    var wrongExists = results.some(function(r){ return !r.correct; });
+    $("retryWrong").disabled = !wrongExists;
+
+    show("result");
+  }
+
+  // ---------- Events ----------
+  $("startBtn").addEventListener("click", function(){
+    startRun(buildOrder(activeCat));
+  });
+  $("btnO").addEventListener("click", function(){ answer(true); });
+  $("btnX").addEventListener("click", function(){ answer(false); });
+  $("nextBtn").addEventListener("click", next);
+
+  $("retryAll").addEventListener("click", function(){
+    startRun(shuffle(order.slice()));
+  });
+  $("retryWrong").addEventListener("click", function(){
+    var wrong=[];
+    for(var i=0;i<results.length;i++){ if(!results[i].correct) wrong.push(results[i].idx); }
+    if(wrong.length) startRun(shuffle(wrong));
+  });
+
+  document.addEventListener("keydown", function(e){
+    if(!screens.quiz.classList.contains("active")) return;
+    var k=e.key.toLowerCase();
+    if(!locked && (k==="o")) { answer(true); }
+    else if(!locked && (k==="x")) { answer(false); }
+    else if(locked && (k==="enter"||k===" ")) { e.preventDefault(); next(); }
+  });
+
+})();
+</script>
+</body>
+</html>
