@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>능률 영어1 · OX 훈련</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&display=swap" />
+<style>
+  :root{
+    --bg:#EEF3FB; --surface:#FFFFFF; --surface-2:#F6F9FE;
+    --ink:#0B2545; --ink-soft:#4A5B7A; --ink-faint:#8A99B5;
+    --line:#DCE5F2; --line-strong:#C6D4EA;
+    --brand:#2563EB; --brand-deep:#163E9E; --brand-soft:#E4EDFD;
+    --shadow:0 10px 30px rgba(11,37,69,.10);
+    --shadow-sm:0 2px 8px rgba(11,37,69,.07);
+    --sans:"Pretendard",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    --serif:"Newsreader",Georgia,serif;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:0 16px 56px;}
+
+  .hero{padding:44px 4px 10px;}
+  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.05em;color:var(--brand);text-transform:uppercase;}
+  .hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(32px,9vw,46px);line-height:1.1;margin:10px 0 6px;}
+  .hero p{color:var(--ink-soft);font-size:15px;margin:0;}
+
+  .stat{display:flex;gap:22px;margin:22px 4px 30px;padding:16px 20px;background:var(--surface);
+    border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-sm);}
+  .stat div{display:flex;flex-direction:column;}
+  .stat b{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--ink);line-height:1;}
+  .stat span{font-size:12px;color:var(--ink-faint);font-weight:600;margin-top:5px;}
+
+  .section-label{font-size:13px;font-weight:700;color:var(--ink-soft);margin:0 4px 12px;}
+
+  .cards{display:flex;flex-direction:column;gap:12px;}
+  .card{
+    display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit;
+    background:var(--surface);border:1px solid var(--line);border-radius:18px;
+    padding:18px 18px;box-shadow:var(--shadow-sm);transition:transform .14s,box-shadow .2s,border-color .2s;
+  }
+  .card.on:active{transform:translateY(1px);}
+  .card.on:hover{box-shadow:var(--shadow);border-color:var(--line-strong);}
+  .num{
+    flex:0 0 auto;width:52px;height:52px;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-weight:600;font-size:24px;
+    background:linear-gradient(180deg,var(--brand),var(--brand-deep));color:#fff;
+    box-shadow:0 5px 12px rgba(37,99,235,.28);
+  }
+  .card .body{flex:1 1 auto;min-width:0;}
+  .card .en{font-family:var(--serif);font-weight:600;font-size:19px;line-height:1.25;color:var(--ink);}
+  .card .ko{font-size:13.5px;color:var(--ink-soft);font-weight:600;margin-top:1px;}
+  .card .go{flex:0 0 auto;color:var(--brand);font-size:22px;font-weight:600;}
+
+  .card.off{opacity:.72;}
+  .card.off .num{background:#E1E8F3;color:var(--ink-faint);box-shadow:none;}
+  .card.off .en{color:var(--ink-soft);}
+  .card.off .go{display:none;}
+  .badge{flex:0 0 auto;font-size:11px;font-weight:800;letter-spacing:.03em;color:var(--ink-faint);
+    background:var(--surface-2);border:1px solid var(--line-strong);padding:5px 10px;border-radius:99px;}
+  .badge.ready{color:var(--brand-deep);background:var(--brand-soft);border-color:#C6DBFB;}
+
+  .foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--ink-faint);}
+  .foot b{color:var(--ink-soft);}
+
+  @media (prefers-reduced-motion:reduce){*{transition-duration:.001ms!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">능률(NE) 고2 · 영어1</div>
+    <h1>OX 훈련</h1>
+    <p>레슨별 보카 · 어법 · 어휘 · 독해를 한 번에.</p>
+  </div>
+
+  <div class="stat">
+    <div><b>6</b><span>레슨</span></div>
+    <div><b>4</b><span>영역</span></div>
+    <div><b>OX</b><span>즉시 채점 · 해설</span></div>
+  </div>
+
+  <div class="section-label">레슨 선택</div>
+  <div class="cards">
+
+    <a class="card on" href="english1-lesson1.html">
+      <span class="num">1</span>
+      <span class="body">
+        <span class="en">A Spark in You</span>
+        <span class="ko">내 안의 불꽃</span>
+      </span>
+      <span class="badge ready">26문항</span>
+      <span class="go">›</span>
+    </a>
+
+    <a class="card off" href="#" aria-disabled="true" onclick="return false;">
+      <span class="num">2</span>
+      <span class="body">
+        <span class="en">Embracing Our Differences</span>
+        <span class="ko">서로의 다름을 끌어안기</span>
+      </span>
+      <span class="badge">준비 중</span>
+    </a>
+
+    <a class="card off" href="#" aria-disabled="true" onclick="return false;">
+      <span class="num">3</span>
+      <span class="body">
+        <span class="en">We Are All Connected</span>
+        <span class="ko">우리는 모두 연결되어 있다</span>
+      </span>
+      <span class="badge">준비 중</span>
+    </a>
+
+    <a class="card off" href="#" aria-disabled="true" onclick="return false;">
+      <span class="num">4</span>
+      <span class="body">
+        <span class="en">Build a Better World</span>
+        <span class="ko">더 나은 세상 만들기</span>
+      </span>
+      <span class="badge">준비 중</span>
+    </a>
+
+    <a class="card off" href="#" aria-disabled="true" onclick="return false;">
+      <span class="num">5</span>
+      <span class="body">
+        <span class="en">Look, Think, and Create!</span>
+        <span class="ko">보고, 생각하고, 창조하라</span>
+      </span>
+      <span class="badge">준비 중</span>
+    </a>
+
+    <a class="card off" href="#" aria-disabled="true" onclick="return false;">
+      <span class="num" style="font-size:18px;">S</span>
+      <span class="body">
+        <span class="en">Coach Carter</span>
+        <span class="ko">Special Lesson · 코치 카터</span>
+      </span>
+      <span class="badge">준비 중</span>
+    </a>
+
+  </div>
+
+  <div class="foot">인후쌤의 영어 아카이브 · <b>english-archive</b></div>
+</div>
+</body>
+</html>
