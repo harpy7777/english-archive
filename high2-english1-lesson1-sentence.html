@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Lesson 1 · A Spark in You — 독해 OX 20제</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" />
+<style>
+  :root{
+    --bg:#EEF3FB; --surface:#FFFFFF; --surface-2:#F6F9FE;
+    --ink:#0B2545; --ink-soft:#4A5B7A; --ink-faint:#8A99B5;
+    --line:#DCE5F2; --line-strong:#C6D4EA;
+    --brand:#2563EB; --brand-deep:#163E9E; --brand-soft:#E4EDFD;
+    --o:#2563EB; --x:#475569;
+    --good:#0E9F6E; --good-soft:#E3F6EE;
+    --bad:#E11D48; --bad-soft:#FCE7EC;
+    --shadow:0 10px 30px rgba(11,37,69,.10);
+    --shadow-sm:0 2px 8px rgba(11,37,69,.07);
+    --r:18px;
+    --sans:"Pretendard",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    --serif:"Newsreader",Georgia,serif;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:var(--sans);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:0 16px 48px;}
+
+  /* Top bar */
+  .topbar{
+    position:sticky;top:0;z-index:20;
+    background:rgba(238,243,251,.86);
+    backdrop-filter:saturate(1.4) blur(10px);
+    -webkit-backdrop-filter:saturate(1.4) blur(10px);
+    padding:12px 16px 10px;
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:10px;}
+  .back{
+    display:inline-flex;align-items:center;gap:4px;
+    color:var(--brand-deep);text-decoration:none;font-weight:600;font-size:14px;
+    padding:6px 10px;border-radius:10px;flex:0 0 auto;
+  }
+  .back:active{background:var(--brand-soft);}
+  .crumb{font-size:13px;color:var(--ink-soft);font-weight:600;flex:1 1 auto;min-width:0;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .counter{font-size:13px;color:var(--ink-faint);font-weight:700;flex:0 0 auto;font-variant-numeric:tabular-nums;}
+  .progress{height:5px;background:var(--line);border-radius:99px;margin-top:10px;overflow:hidden;max-width:640px;margin-left:auto;margin-right:auto;}
+  .progress-inner{height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand-deep));border-radius:99px;transition:width .35s cubic-bezier(.4,0,.2,1);}
+
+  /* Screens */
+  .screen{display:none;animation:fade .35s ease both;}
+  .screen.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+  /* Start screen */
+  .hero{padding:34px 4px 8px;}
+  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--brand);text-transform:uppercase;}
+  .hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,8vw,44px);line-height:1.12;margin:8px 0 4px;color:var(--ink);}
+  .hero .ko{font-size:16px;color:var(--ink-soft);font-weight:600;margin-bottom:2px;}
+  .hero h1 .ko-in{font-family:var(--sans);font-size:clamp(15px,4.2vw,18px);font-weight:600;color:var(--ink-soft);letter-spacing:0;white-space:nowrap;}
+  .hero .src{font-size:13px;color:var(--ink-faint);}
+
+  .field{margin-top:26px;}
+  .field-label{font-size:13px;font-weight:700;color:var(--ink-soft);margin-bottom:10px;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{
+    appearance:none;border:1.5px solid var(--line-strong);background:var(--surface);
+    color:var(--ink-soft);font-family:inherit;font-weight:600;font-size:14px;
+    padding:9px 16px;border-radius:99px;cursor:pointer;transition:.15s;
+  }
+  .chip .n{font-size:12px;color:var(--ink-faint);margin-left:5px;font-weight:700;}
+  .chip[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff;box-shadow:var(--shadow-sm);}
+  .chip[aria-pressed="true"] .n{color:rgba(255,255,255,.8);}
+
+  .startbtn{
+    margin-top:30px;width:100%;border:none;cursor:pointer;font-family:inherit;
+    background:linear-gradient(180deg,var(--brand),var(--brand-deep));
+    color:#fff;font-weight:700;font-size:17px;padding:17px;border-radius:16px;
+    box-shadow:0 8px 20px rgba(37,99,235,.30);transition:transform .12s,box-shadow .2s;
+  }
+  .startbtn:active{transform:translateY(1px);box-shadow:0 4px 12px rgba(37,99,235,.28);}
+
+  .legend{margin-top:18px;font-size:13px;color:var(--ink-faint);line-height:1.7;}
+  .legend b{color:var(--ink-soft);}
+
+  /* Question card */
+  .qwrap{padding-top:22px;}
+  .qcard{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+    box-shadow:var(--shadow);padding:24px 22px 26px;position:relative;overflow:hidden;
+  }
+  .cat{
+    display:inline-block;font-size:12px;font-weight:800;letter-spacing:.03em;
+    color:var(--brand-deep);background:var(--brand-soft);
+    padding:5px 12px;border-radius:99px;margin-bottom:16px;
+  }
+  .prompt{font-size:13.5px;color:var(--ink-faint);font-weight:600;margin-bottom:16px;}
+  .stmt-en{font-family:var(--serif);font-size:clamp(21px,5.6vw,27px);line-height:1.4;color:var(--ink);font-weight:500;letter-spacing:-.01em;}
+  .stmt-en em{font-style:italic;}
+  .stmt-ko{font-size:clamp(17px,4.6vw,20px);line-height:1.55;color:var(--ink);font-weight:600;margin-top:2px;}
+  .vocab{display:flex;flex-direction:column;gap:6px;}
+  .vocab .word{font-family:var(--serif);font-size:clamp(28px,7.5vw,38px);font-weight:600;color:var(--ink);letter-spacing:-.01em;}
+  .vocab .arrow{color:var(--brand);font-weight:700;}
+  .vocab .mean{font-size:clamp(19px,5vw,23px);font-weight:700;color:var(--ink);}
+
+  /* OX buttons */
+  .ox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;}
+  .oxbtn{
+    appearance:none;cursor:pointer;font-family:var(--serif);
+    border:2px solid var(--line-strong);background:var(--surface-2);
+    border-radius:16px;padding:22px 8px 18px;text-align:center;transition:.14s;
+    display:flex;flex-direction:column;align-items:center;gap:2px;
+  }
+  .oxbtn .mark{font-size:40px;line-height:1;font-weight:600;}
+  .oxbtn .lab{font-family:var(--sans);font-size:12px;font-weight:700;color:var(--ink-faint);letter-spacing:.02em;}
+  .oxbtn.o{color:var(--o);}
+  .oxbtn.x{color:var(--x);}
+  .oxbtn.o:active{background:var(--brand-soft);border-color:var(--o);}
+  .oxbtn.x:active{background:#EEF1F6;border-color:var(--x);}
+  .oxbtn:disabled{cursor:default;opacity:.5;}
+  .oxbtn.chosen{opacity:1;box-shadow:var(--shadow-sm);}
+  .oxbtn.o.chosen{border-color:var(--o);background:var(--brand-soft);}
+  .oxbtn.x.chosen{border-color:var(--x);background:#EDF0F5;}
+
+  /* Grading stamp */
+  .stamp{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-14deg) scale(.4);
+    opacity:0;pointer-events:none;z-index:5;
+    border:4px solid;border-radius:14px;padding:6px 18px;
+    font-family:var(--sans);font-weight:900;font-size:34px;letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  .stamp.show{animation:stampin .5s cubic-bezier(.2,1.3,.4,1) forwards;}
+  .stamp.good{color:var(--good);border-color:var(--good);}
+  .stamp.bad{color:var(--bad);border-color:var(--bad);}
+  @keyframes stampin{
+    0%{opacity:0;transform:translate(-50%,-50%) rotate(-14deg) scale(1.7);}
+    60%{opacity:1;transform:translate(-50%,-50%) rotate(-14deg) scale(.92);}
+    100%{opacity:.14;transform:translate(-50%,-50%) rotate(-14deg) scale(1);}
+  }
+
+  /* Reveal */
+  .reveal{margin-top:18px;border-radius:14px;padding:16px 16px;font-size:14.5px;line-height:1.65;
+    border:1px solid var(--line);background:var(--surface-2);display:none;animation:fade .3s ease both;}
+  .reveal.show{display:block;}
+  .reveal.correct{background:var(--good-soft);border-color:#BFE9D5;}
+  .reveal.wrong{background:var(--bad-soft);border-color:#F6C9D3;}
+  .reveal .verdict{font-weight:800;font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:7px;}
+  .reveal.correct .verdict{color:var(--good);}
+  .reveal.wrong .verdict{color:var(--bad);}
+  .reveal .ex{color:var(--ink);}
+  .reveal .fix{margin-top:9px;padding-top:9px;border-top:1px dashed var(--line-strong);color:var(--ink-soft);font-size:13.5px;}
+  .reveal .fix b{color:var(--ink);}
+  .reveal .fix .en{font-family:var(--serif);font-style:italic;}
+
+  .nextbtn{
+    margin-top:14px;width:100%;border:none;cursor:pointer;font-family:inherit;display:none;
+    background:var(--ink);color:#fff;font-weight:700;font-size:16px;padding:15px;border-radius:14px;transition:transform .12s;
+  }
+  .nextbtn.show{display:block;}
+  .nextbtn:active{transform:translateY(1px);}
+
+  /* Result */
+  .result{padding-top:26px;text-align:center;}
+  .result .ring{width:150px;height:150px;margin:6px auto 4px;position:relative;}
+  .result .ring svg{transform:rotate(-90deg);}
+  .result .ring .pct{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .result .ring .pct b{font-size:38px;font-weight:800;color:var(--ink);line-height:1;font-variant-numeric:tabular-nums;}
+  .result .ring .pct span{font-size:12px;color:var(--ink-faint);font-weight:700;margin-top:3px;}
+  .result h2{font-family:var(--serif);font-weight:600;font-size:26px;margin:14px 0 4px;}
+  .result .sub{color:var(--ink-soft);font-size:15px;margin-bottom:22px;}
+  .result .sub b{color:var(--brand-deep);}
+  .breakdown{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:8px 18px;box-shadow:var(--shadow-sm);}
+  .brow{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);}
+  .brow:last-child{border-bottom:none;}
+  .brow .name{font-weight:700;font-size:14px;width:52px;flex:0 0 auto;color:var(--ink);}
+  .bar{flex:1 1 auto;height:9px;background:var(--line);border-radius:99px;overflow:hidden;}
+  .bar span{display:block;height:100%;background:linear-gradient(90deg,var(--brand),var(--brand-deep));border-radius:99px;}
+  .brow .score{font-size:13px;font-weight:700;color:var(--ink-soft);flex:0 0 auto;font-variant-numeric:tabular-nums;width:48px;text-align:right;}
+  .result-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px;}
+  .btn-ghost,.btn-solid{border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:15px;padding:15px;border-radius:14px;transition:transform .12s;}
+  .btn-ghost{background:var(--surface);border:1.5px solid var(--line-strong);color:var(--ink);}
+  .btn-solid{background:linear-gradient(180deg,var(--brand),var(--brand-deep));color:#fff;box-shadow:0 6px 16px rgba(37,99,235,.28);}
+  .btn-ghost:active,.btn-solid:active{transform:translateY(1px);}
+  .btn-ghost:disabled{opacity:.4;cursor:default;}
+  .hub-link{display:inline-block;margin-top:18px;color:var(--brand-deep);font-weight:600;font-size:14px;text-decoration:none;}
+
+  .kbd-hint{margin-top:16px;font-size:12px;color:var(--ink-faint);text-align:center;}
+  .kbd-hint kbd{font-family:var(--sans);background:var(--surface);border:1px solid var(--line-strong);border-bottom-width:2px;border-radius:6px;padding:1px 7px;font-size:11px;font-weight:700;color:var(--ink-soft);}
+
+  @media (min-width:560px){ .kbd-hint{display:block;} }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms!important;transition-duration:.001ms!important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="back" href="high2-english1-lesson1.html" aria-label="Lesson 1로">‹ Lesson 1</a>
+    <div class="crumb">Lesson 1 · 독해</div>
+    <div class="counter" id="counter"></div>
+  </div>
+  <div class="progress"><div class="progress-inner" id="progressBar"></div></div>
+</div>
+
+<div class="wrap">
+
+  <!-- START -->
+  <section class="screen active" id="startScreen">
+    <div class="hero">
+      <div class="eyebrow">Lesson 1</div>
+      <h1>A Spark in You <span class="ko-in">(네 안의 가능성)</span></h1>
+      <div class="src">능률(NE) 고2 영어1 · 독해 OX 20제</div>
+    </div>
+
+    <button class="startbtn" id="startBtn">시작하기</button>
+
+    <div class="legend">
+      <b>O</b> 본문 내용과 일치 · <b>X</b> 불일치<br />
+      「A Spark in You (Can I Swim?)」 내용 이해를 O/X로 점검합니다.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="screen" id="quizScreen">
+    <div class="qwrap">
+      <div class="qcard">
+        <div class="stamp" id="stamp"></div>
+        <span class="cat" id="qCat"></span>
+        <div class="prompt" id="qPrompt"></div>
+        <div id="qBody"></div>
+
+        <div class="ox">
+          <button class="oxbtn o" id="btnO"><span class="mark">O</span><span class="lab">맞다</span></button>
+          <button class="oxbtn x" id="btnX"><span class="mark">X</span><span class="lab">틀리다</span></button>
+        </div>
+
+        <div class="reveal" id="reveal">
+          <div class="verdict" id="verdict"></div>
+          <div class="ex" id="exText"></div>
+          <div class="fix" id="fixText" style="display:none"></div>
+        </div>
+        <button class="nextbtn" id="nextBtn">다음 문제 ›</button>
+      </div>
+      <div class="kbd-hint">키보드: <kbd>O</kbd> 맞다 · <kbd>X</kbd> 틀리다 · <kbd>Enter</kbd> 다음</div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section class="screen" id="resultScreen">
+    <div class="result">
+      <div class="ring">
+        <svg width="150" height="150" viewBox="0 0 150 150">
+          <circle cx="75" cy="75" r="66" fill="none" stroke="var(--line)" stroke-width="12"/>
+          <circle id="ringFill" cx="75" cy="75" r="66" fill="none" stroke="var(--brand)" stroke-width="12"
+                  stroke-linecap="round" stroke-dasharray="414.7" stroke-dashoffset="414.7"/>
+        </svg>
+        <div class="pct"><b id="pctNum">0</b><span>정답률</span></div>
+      </div>
+      <h2 id="resultTitle">수고했어요!</h2>
+      <div class="sub" id="resultSub"></div>
+      <div class="breakdown" id="breakdown"></div>
+      <div class="result-actions">
+        <button class="btn-ghost" id="retryWrong">오답만 다시</button>
+        <button class="btn-solid" id="retryAll">처음부터</button>
+      </div>
+      <a class="hub-link" href="high2-english1-lesson1.html">‹ Lesson 1 홈으로</a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---------- Lesson 1 data ----------
+  // a:true  => 진술이 옳음(정답 O) / a:false => 틀림(정답 X)
+  var PROMPTS = {
+    "독해":"본문 내용과 일치하면 O, 아니면 X"
+  };
+
+  var QUESTIONS = [
+    {cat:"독해", ko:"펭귄은 해변에서 기름에 뒤덮인 채 발견되었다.", a:true, ex:"도입부에서 화자는 해변에서 기름에 뒤덮인 펭귄을 발견합니다."},
+    {cat:"독해", ko:"화자는 펭귄의 깃털을 하나하나 닦아 살려 냈다.", a:true, ex:"화자는 깃털을 하나하나 정성껏 닦아 펭귄을 구조합니다."},
+    {cat:"독해", ko:"구조된 펭귄에게는 Juan Salvado라는 이름이 붙여졌다.", a:true, ex:"구조된 펭귄은 Juan Salvado라는 이름을 얻습니다."},
+    {cat:"독해", ko:"Diego는 원래 물을 무서워하고 주저하던 소심한 소년이었다.", a:true, ex:"Diego는 물을 무서워하고 늘 주저하던 소심한 소년으로 그려집니다."},
+    {cat:"독해", ko:"Diego는 펭귄을 돌보면서 조금씩 마음을 열었다.", a:true, ex:"Diego는 펭귄을 돌보며 little by little 마음을 엽니다."},
+    {cat:"독해", ko:"Diego는 마침내 두려움을 이겨 내고 스스로 헤엄쳤다.", a:true, ex:"절정에서 Diego는 두려움을 극복하고 스스로 헤엄칩니다."},
+    {cat:"독해", ko:"펭귄은 학교에서 지내게 되었다.", a:true, ex:"펭귄은 학교에서 지내며 학생들과 어울립니다."},
+    {cat:"독해", ko:"이 글의 주제는 누구에게나 잠재된 \u2018불씨(a spark)\u2019가 있다는 것이다.", a:true, ex:"주제: 누구에게나 불씨가 있고, 관심·격려·용기가 그것을 피어나게 합니다."},
+    {cat:"독해", ko:"주위 사람들은 Diego의 놀라운 변화를 지켜보았다.", a:true, ex:"마무리에서 주위 사람들이 Diego의 remarkable한 변화를 지켜봅니다."},
+    {cat:"독해", ko:"\u201cCan I Swim?\u201d이라는 물음은 결국 \u2018나도 할 수 있다\u2019는 확신으로 바뀐다.", a:true, ex:"\u201cCan I Swim?\u201d이 \u201c나도 할 수 있다\u201d는 확신으로 바뀝니다."},
+    {cat:"독해", ko:"펭귄은 깨끗한 상태로 바닷가에서 헤엄치고 있었다.", a:false, ex:"펭귄은 기름에 뒤덮인 채 발견되었습니다.", fix:"깨끗한 상태 → 기름에 뒤덮인 상태"},
+    {cat:"독해", ko:"화자는 펭귄을 발견하자마자 곧바로 동물원에 넘겼다.", a:false, ex:"화자는 직접 데려와 깃털을 닦으며 살려 냈습니다.", fix:"동물원에 넘김 → 직접 돌봄"},
+    {cat:"독해", ko:"Diego는 처음부터 수영을 아주 잘하는 소년이었다.", a:false, ex:"Diego는 원래 물을 무서워하고 주저하던 소년이었습니다.", fix:"처음부터 잘함 → 두려움을 극복해 감"},
+    {cat:"독해", ko:"펭귄은 구조된 뒤 곧바로 바다로 돌아가 화자를 떠났다.", a:false, ex:"펭귄은 화자의 곁을 떠나지 않았습니다.", fix:"곧바로 떠남 → 곁에 머묾"},
+    {cat:"독해", ko:"Diego의 변화에는 펭귄과의 만남이 아무 영향을 주지 않았다.", a:false, ex:"펭귄과의 만남이 Diego 변화의 결정적 계기입니다.", fix:"영향 없음 → 결정적 계기"},
+    {cat:"독해", ko:"이 이야기에서 펭귄의 이름은 Diego였다.", a:false, ex:"펭귄의 이름은 Juan Salvado, Diego는 소년의 이름입니다.", fix:"펭귄 = Juan Salvado / Diego = 소년"},
+    {cat:"독해", ko:"Diego는 끝까지 물에 들어가지 못하고 수영을 포기했다.", a:false, ex:"Diego는 결국 두려움을 이겨 내고 스스로 헤엄쳤습니다.", fix:"포기 → 극복해 스스로 헤엄침"},
+    {cat:"독해", ko:"글쓴이는 재능이 타고난 소수에게만 있다고 말한다.", a:false, ex:"글은 누구에게나 불씨(잠재력)가 있다고 말합니다.", fix:"소수만 → 누구에게나"},
+    {cat:"독해", ko:"화자는 펭귄을 귀찮아하며 빨리 없애고 싶어 했다.", a:false, ex:"화자는 펭귄을 정성껏 돌보며 정이 듭니다(attached).", fix:"귀찮아함 → 애착을 느낌"},
+    {cat:"독해", ko:"Diego의 자신감은 큰 사건이 아니라 작은 계기 하나에서 시작되었다.", a:true, ex:"작은 계기(불씨) 하나가 Diego의 자신감을 끌어올립니다."}
+  ];
+
+  // ---------- State ----------
+  var order = [];      // indices into QUESTIONS for current run
+  var pos = 0;
+  var results = [];    // {idx, chosen(bool), correct(bool)}
+  var activeCat = "전체";
+  var locked = false;
+
+  // ---------- Elements ----------
+  var $ = function(id){ return document.getElementById(id); };
+  var screens = {start:$("startScreen"), quiz:$("quizScreen"), result:$("resultScreen")};
+
+  // 단일 영역(독해)이므로 카테고리 칩 없이 전체로 진행
+  activeCat = "전체";
+
+  function show(name){
+    for(var k in screens){ screens[k].classList.remove("active"); }
+    screens[name].classList.add("active");
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+
+  function shuffle(arr){
+    for(var i=arr.length-1;i>0;i--){
+      var j=Math.floor(Math.random()*(i+1));
+      var t=arr[i]; arr[i]=arr[j]; arr[j]=t;
+    }
+    return arr;
+  }
+
+  function buildOrder(cat){
+    var idxs=[];
+    for(var i=0;i<QUESTIONS.length;i++){
+      if(cat==="전체" || QUESTIONS[i].cat===cat) idxs.push(i);
+    }
+    return shuffle(idxs);
+  }
+
+  function startRun(idxs){
+    order = idxs;
+    pos = 0;
+    results = [];
+    locked = false;
+    show("quiz");
+    renderQuestion();
+  }
+
+  function updateProgress(){
+    var total=order.length;
+    var frac= total ? (pos)/total : 0;
+    $("progressBar").style.width = (frac*100)+"%";
+    $("counter").textContent = (pos+1)+" / "+total;
+  }
+
+  function renderQuestion(){
+    locked=false;
+    var q=QUESTIONS[order[pos]];
+    updateProgress();
+
+    $("qCat").textContent = q.cat;
+    $("qPrompt").textContent = PROMPTS[q.cat] || "맞으면 O, 틀리면 X";
+
+    var body="";
+    if(q.cat==="보카"){
+      body = '<div class="vocab"><span class="word">'+q.en+'</span>'+
+             '<span class="mean"><span class="arrow">뜻&nbsp;=&nbsp;</span>'+q.ko+'</span></div>';
+    } else if(q.en){
+      body = '<div class="stmt-en">'+q.en+'</div>';
+      if(q.ko){ body += '<div class="stmt-ko">'+q.ko+'</div>'; }
+    } else {
+      body = '<div class="stmt-ko">'+q.ko+'</div>';
+    }
+    $("qBody").innerHTML = body;
+
+    // reset UI
+    var btnO=$("btnO"), btnX=$("btnX");
+    btnO.disabled=false; btnX.disabled=false;
+    btnO.classList.remove("chosen"); btnX.classList.remove("chosen");
+    var stamp=$("stamp"); stamp.className="stamp"; stamp.textContent="";
+    var rev=$("reveal"); rev.className="reveal";
+    $("nextBtn").classList.remove("show");
+  }
+
+  function answer(choiceIsO){
+    if(locked) return;
+    locked=true;
+    var q=QUESTIONS[order[pos]];
+    var correct = (choiceIsO === q.a);
+    results.push({idx:order[pos], chosen:choiceIsO, correct:correct});
+
+    var btnO=$("btnO"), btnX=$("btnX");
+    btnO.disabled=true; btnX.disabled=true;
+    (choiceIsO?btnO:btnX).classList.add("chosen");
+
+    var stamp=$("stamp");
+    stamp.textContent = correct ? "정답" : "오답";
+    stamp.className = "stamp show " + (correct?"good":"bad");
+
+    var rev=$("reveal");
+    rev.className = "reveal show " + (correct?"correct":"wrong");
+    $("verdict").innerHTML = correct
+      ? '<span>✓</span> 정답 &nbsp;·&nbsp; 답은 '+(q.a?"O":"X")
+      : '<span>✕</span> 오답 &nbsp;·&nbsp; 답은 '+(q.a?"O":"X");
+    $("exText").innerHTML = q.ex || "";
+    var fix=$("fixText");
+    if(q.fix){ fix.style.display="block"; fix.innerHTML='<b>정리&nbsp;·&nbsp;</b>'+q.fix; }
+    else { fix.style.display="none"; fix.innerHTML=""; }
+
+    $("nextBtn").classList.add("show");
+  }
+
+  function next(){
+    if(pos < order.length-1){
+      pos++;
+      renderQuestion();
+    } else {
+      showResult();
+    }
+  }
+
+  function showResult(){
+    // finalize progress
+    $("progressBar").style.width="100%";
+    $("counter").textContent = order.length+" / "+order.length;
+
+    var total=results.length;
+    var correctN=0;
+    var byCat={};
+    for(var i=0;i<results.length;i++){
+      var r=results[i];
+      var c=QUESTIONS[r.idx].cat;
+      if(!byCat[c]) byCat[c]={c:0,t:0};
+      byCat[c].t++;
+      if(r.correct){ correctN++; byCat[c].c++; }
+    }
+    var pct = total ? Math.round(correctN/total*100) : 0;
+
+    // ring
+    var circ=414.7;
+    $("ringFill").style.strokeDashoffset = circ*(1-pct/100);
+    var col = pct>=80?"var(--good)":(pct>=50?"var(--brand)":"var(--bad)");
+    $("ringFill").setAttribute("stroke", col);
+
+    // animate number
+    var n=0; var target=pct;
+    var timer=setInterval(function(){
+      n += Math.max(1, Math.round(target/22));
+      if(n>=target){ n=target; clearInterval(timer); }
+      $("pctNum").textContent=n;
+    }, 24);
+
+    $("resultTitle").textContent =
+      pct>=80 ? "훌륭해요! 🎯" : pct>=50 ? "잘했어요, 조금만 더!" : "다시 한 번 도전!";
+    $("resultSub").innerHTML = "총 "+total+"문제 중 <b>"+correctN+"문제</b> 정답";
+
+    // breakdown
+    var order2=["독해"];
+    var html="";
+    order2.forEach(function(c){
+      if(!byCat[c]) return;
+      var d=byCat[c];
+      var p=Math.round(d.c/d.t*100);
+      html += '<div class="brow"><span class="name">'+c+'</span>'+
+              '<span class="bar"><span style="width:'+p+'%"></span></span>'+
+              '<span class="score">'+d.c+'/'+d.t+'</span></div>';
+    });
+    $("breakdown").innerHTML = html;
+
+    // wrong-only availability
+    var wrongExists = results.some(function(r){ return !r.correct; });
+    $("retryWrong").disabled = !wrongExists;
+
+    show("result");
+  }
+
+  // ---------- Events ----------
+  $("startBtn").addEventListener("click", function(){
+    startRun(buildOrder(activeCat));
+  });
+  $("btnO").addEventListener("click", function(){ answer(true); });
+  $("btnX").addEventListener("click", function(){ answer(false); });
+  $("nextBtn").addEventListener("click", next);
+
+  $("retryAll").addEventListener("click", function(){
+    startRun(shuffle(order.slice()));
+  });
+  $("retryWrong").addEventListener("click", function(){
+    var wrong=[];
+    for(var i=0;i<results.length;i++){ if(!results[i].correct) wrong.push(results[i].idx); }
+    if(wrong.length) startRun(shuffle(wrong));
+  });
+
+  // keyboard
+  document.addEventListener("keydown", function(e){
+    if(!screens.quiz.classList.contains("active")) return;
+    var k=e.key.toLowerCase();
+    if(!locked && (k==="o")) { answer(true); }
+    else if(!locked && (k==="x")) { answer(false); }
+    else if(locked && (k==="enter"||k===" ")) { e.preventDefault(); next(); }
+  });
+
+})();
+</script>
+</body>
+</html>
