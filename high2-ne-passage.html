@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#2f55d4">
+<title>능률 영어1 · 지문 &amp; OX — JANICE</title>
+<meta property="og:type" content="website" />
+<meta property="og:title" content="능률 영어1 · 지문 & OX" />
+<meta property="og:description" content="고등 2학년 능률 영어1 · 레슨별 보카·어법·어휘·독해 OX 훈련." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 140'><polygon points='70,8 121,38 121,102 70,132 19,102 19,38' fill='none' stroke='%232f55d4' stroke-width='8' stroke-linejoin='round'/><circle cx='70' cy='8' r='10' fill='%232f55d4'/><circle cx='121' cy='38' r='10' fill='%232f55d4'/><circle cx='121' cy='102' r='10' fill='%232f55d4'/><circle cx='70' cy='132' r='10' fill='%232f55d4'/><circle cx='19' cy='102' r='10' fill='%232f55d4'/><circle cx='19' cy='38' r='10' fill='%232f55d4'/></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --royal: #2f55d4; --royal-light: #4169e1;
+  --royal-pale: #dbe3f8; --royal-soft: #eef2fc;
+  --ink: #1d1d1f; --ink-soft: #4a5b7a; --ink-faint: #9aa3b5;
+  --line: #e6ebf6;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Helvetica Neue', Arial, sans-serif;
+  background: #ffffff; color: var(--ink); min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; padding-left: var(--safe-left); padding-right: var(--safe-right);
+}
+.header {
+  background: rgba(255,255,255,0.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line); padding: 0 1rem; padding-top: var(--safe-top);
+  height: calc(54px + var(--safe-top)); display: flex; align-items: center; gap: 8px;
+  position: sticky; top: 0; z-index: 100;
+}
+.back {
+  display: inline-flex; align-items: center; gap: 4px; color: var(--royal);
+  text-decoration: none; font-weight: 600; font-size: 13px; padding: 7px 10px; border-radius: 10px;
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+}
+.back:active { background: var(--royal-soft); }
+.header-title { font-size: 14px; font-weight: 600; letter-spacing: -0.3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.hero { text-align: center; padding: 2.2rem 1.2rem 1.4rem; max-width: 560px; margin: 0 auto; }
+.hero-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--royal); margin-bottom: 0.6rem; }
+.hero-title { font-size: clamp(1.5rem, 6vw, 1.95rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 0.5rem; }
+.hero-title em { font-style: normal; color: var(--royal); }
+.hero-sub { font-size: clamp(0.8rem, 3vw, 0.9rem); color: #6e6e73; line-height: 1.6; }
+
+.list-wrap { max-width: 620px; margin: 0 auto; padding: 0.4rem 1rem calc(2.5rem + var(--safe-bottom)); }
+
+.lesson {
+  display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit;
+  background: #fff; border: 1px solid var(--line); border-radius: 16px;
+  padding: 15px 16px; margin-bottom: 11px;
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+  transition: transform 0.16s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.lesson.on:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(47,85,212,0.12); border-color: #c3d1f2; }
+.lesson.on:active { transform: scale(0.985); }
+.num {
+  flex: 0 0 auto; width: 48px; height: 48px; border-radius: 13px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 800; letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #5b7bef 0%, #2f55d4 100%); color: #fff;
+  box-shadow: 0 5px 12px rgba(47,85,212,0.28);
+}
+.lesson .body { flex: 1 1 auto; min-width: 0; }
+.lesson .en { font-size: 15.5px; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; word-break: keep-all; }
+.lesson .ko { font-size: 12.5px; color: var(--ink-soft); font-weight: 500; margin-top: 2px; word-break: keep-all; }
+.badge { flex: 0 0 auto; font-size: 11px; font-weight: 800; letter-spacing: 0.02em; color: var(--royal); background: var(--royal-soft); border: 1px solid #cdd9f5; padding: 5px 10px; border-radius: 99px; white-space: nowrap; }
+.go { flex: 0 0 auto; color: var(--royal); font-size: 20px; font-weight: 700; line-height: 1; }
+
+.lesson.off { opacity: 0.66; cursor: default; }
+.lesson.off .num { background: #e3e8f3; color: var(--ink-faint); box-shadow: none; }
+.lesson.off .en { color: var(--ink-soft); }
+.lesson.off .go { display: none; }
+.lesson.off .badge { color: var(--ink-faint); background: #f4f6fb; border-color: var(--line); }
+
+.foot { text-align: center; font-size: 12px; color: var(--ink-faint); margin-top: 6px; }
+.foot b { color: var(--ink-soft); }
+
+@media (max-width: 400px) {
+  .num { width: 42px; height: 42px; border-radius: 11px; font-size: 17px; }
+  .lesson { gap: 11px; padding: 13px 13px; }
+  .lesson .en { font-size: 14px; }
+  .lesson .ko { font-size: 11.5px; }
+  .badge { font-size: 10px; padding: 4px 8px; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <a class="back" href="index.html">‹ 허브</a>
+  <span class="header-title">고2 · 능률 영어1</span>
+</header>
+
+<section class="hero">
+  <div class="hero-eyebrow">고등 2학년 · 능률(NE) 영어1</div>
+  <h1 class="hero-title">지문 &amp; <em>OX 훈련</em></h1>
+  <p class="hero-sub">레슨별 보카 · 어법 · 어휘 · 독해를<br>OX로 즉시 채점 · 해설</p>
+</section>
+
+<div class="list-wrap">
+
+  <a class="lesson on" href="high2-english1-lesson1.html">
+    <span class="num">1</span>
+    <span class="body">
+      <span class="en">A Spark in You</span>
+      <span class="ko">내 안의 불꽃</span>
+    </span>
+    <span class="badge">26문항</span>
+    <span class="go">›</span>
+  </a>
+
+  <div class="lesson off">
+    <span class="num">2</span>
+    <span class="body">
+      <span class="en">Embracing Our Differences</span>
+      <span class="ko">서로의 다름을 끌어안기</span>
+    </span>
+    <span class="badge">준비 중</span>
+  </div>
+
+  <div class="lesson off">
+    <span class="num">3</span>
+    <span class="body">
+      <span class="en">We Are All Connected</span>
+      <span class="ko">우리는 모두 연결되어 있다</span>
+    </span>
+    <span class="badge">준비 중</span>
+  </div>
+
+  <div class="lesson off">
+    <span class="num">4</span>
+    <span class="body">
+      <span class="en">Build a Better World</span>
+      <span class="ko">더 나은 세상 만들기</span>
+    </span>
+    <span class="badge">준비 중</span>
+  </div>
+
+  <div class="lesson off">
+    <span class="num">5</span>
+    <span class="body">
+      <span class="en">Look, Think, and Create!</span>
+      <span class="ko">보고, 생각하고, 창조하라</span>
+    </span>
+    <span class="badge">준비 중</span>
+  </div>
+
+  <div class="lesson off">
+    <span class="num" style="font-size:16px;">S</span>
+    <span class="body">
+      <span class="en">Coach Carter</span>
+      <span class="ko">Special Lesson · 코치 카터</span>
+    </span>
+    <span class="badge">준비 중</span>
+  </div>
+
+  <div class="foot">JANICE의 영어 관리 시스템 · <b>능률 영어1</b></div>
+</div>
+
+</body>
+</html>
