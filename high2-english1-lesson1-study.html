@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="theme-color" content="#2f55d4" />
+<title>Lesson 1 지문정리 · A Spark in You — 능률 영어1</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  :root{
+    --bg:#EEF2FB;
+    --surface:#FFFFFF;
+    --surface-2:#F5F8FE;
+    --ink:#0F2247;
+    --ink-soft:#46577A;
+    --ink-faint:#8493AE;
+    --line:#DCE4F3;
+    --line-strong:#C7D4EC;
+
+    --brand:#2f55d4;         /* 로얄블루 */
+    --brand-deep:#1e3a9e;
+    --brand-soft:#E7ECFB;
+
+    /* 탭별 스캔용 액센트 (로얄블루 계열로 절제) */
+    --c-word:#2f55d4;   --c-word-soft:#E7ECFB;
+    --c-gram:#5b46d4;   --c-gram-soft:#EBE8FB;
+    --c-expr:#0f8bd4;   --c-expr-soft:#E1F1FB;
+    --c-sum:#7b3fd4;    --c-sum-soft:#F0E9FB;
+
+    --good:#0e9f6e;
+    --shadow:0 10px 30px rgba(15,34,71,.10);
+    --shadow-sm:0 2px 10px rgba(15,34,71,.07);
+    --r:18px; --r-sm:12px;
+    --font:"Pretendard",-apple-system,BlinkMacSystemFont,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:var(--font);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    word-break:keep-all;
+    padding:env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left);
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:0 16px calc(40px + env(safe-area-inset-bottom));}
+  a{color:inherit;text-decoration:none;}
+
+  /* ── Top bar ── */
+  .topbar{
+    position:sticky;top:0;z-index:40;
+    background:rgba(238,242,251,.86);
+    backdrop-filter:saturate(1.4) blur(10px);
+    -webkit-backdrop-filter:saturate(1.4) blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-in{
+    max-width:640px;margin:0 auto;
+    padding:calc(10px + env(safe-area-inset-top)) 16px 10px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .back{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:14px;font-weight:600;color:var(--brand-deep);
+    padding:8px 12px;border-radius:999px;background:var(--brand-soft);
+    min-height:40px;
+  }
+  .back:active{transform:scale(.97);}
+  .topbar-title{
+    font-size:13px;font-weight:700;color:var(--ink-soft);
+    margin-left:auto;letter-spacing:-.2px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+
+  /* ── Hero ── */
+  .hero{
+    margin-top:16px;
+    background:linear-gradient(150deg,#2f55d4 0%,#3b63e0 46%,#5b46d4 100%);
+    color:#fff;border-radius:22px;
+    padding:22px 20px 20px;
+    box-shadow:0 14px 34px rgba(47,85,212,.32);
+    position:relative;overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;right:-40px;top:-40px;
+    width:170px;height:170px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.28),rgba(255,255,255,0) 70%);
+  }
+  .hero-eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:12px;font-weight:700;letter-spacing:.3px;
+    background:rgba(255,255,255,.18);
+    padding:6px 12px;border-radius:999px;margin-bottom:12px;
+  }
+  .hero h1{
+    font-size:26px;line-height:1.24;font-weight:800;
+    margin:0 0 6px;letter-spacing:-.4px;
+  }
+  .hero .reading{
+    font-size:15px;font-weight:600;opacity:.94;margin:0 0 12px;
+  }
+  .hero .reading b{font-weight:800;}
+  .hero-desc{
+    font-size:13.5px;line-height:1.6;opacity:.9;margin:0 0 16px;
+    max-width:38ch;
+  }
+  .hero-meta{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:12px;font-weight:700;
+    background:rgba(255,255,255,.16);
+    padding:7px 11px;border-radius:10px;
+  }
+  .chip .num{font-size:13px;}
+
+  /* ── Tabs ── */
+  .tabbar{
+    position:sticky;top:57px;z-index:30;
+    margin-top:16px;
+    background:var(--bg);
+    padding:8px 0 6px;
+  }
+  .tabs{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:6px;
+    background:var(--surface);border:1px solid var(--line);
+    padding:6px;border-radius:16px;box-shadow:var(--shadow-sm);
+  }
+  .tab{
+    appearance:none;border:0;background:transparent;cursor:pointer;
+    font-family:inherit;font-size:13px;font-weight:700;color:var(--ink-soft);
+    padding:11px 4px;border-radius:11px;line-height:1.25;
+    display:flex;flex-direction:column;align-items:center;gap:4px;
+    min-height:52px;transition:background .18s,color .18s;
+  }
+  .tab .ti{font-size:16px;line-height:1;}
+  .tab[aria-selected="true"]{color:#fff;background:var(--brand);}
+  .tab:active{transform:scale(.97);}
+
+  /* ── Panels ── */
+  .panel{display:none;animation:fade .28s ease;}
+  .panel.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+  .sec-head{
+    display:flex;align-items:center;gap:10px;
+    margin:20px 2px 12px;
+  }
+  .sec-dot{width:10px;height:10px;border-radius:50%;flex:0 0 auto;}
+  .sec-head h2{font-size:17px;font-weight:800;margin:0;letter-spacing:-.3px;}
+  .sec-head .cnt{
+    margin-left:auto;font-size:12px;font-weight:700;color:var(--ink-faint);
+    background:var(--surface);border:1px solid var(--line);
+    padding:4px 9px;border-radius:999px;
+  }
+
+  /* 단어 카드 */
+  .word{
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--r-sm);padding:14px 15px;margin-bottom:9px;
+    box-shadow:var(--shadow-sm);
+  }
+  .word-top{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;}
+  .word-en{font-size:17px;font-weight:800;letter-spacing:-.2px;color:var(--ink);}
+  .word-pos{
+    font-size:11px;font-weight:700;color:var(--c-word);
+    background:var(--c-word-soft);padding:2px 8px;border-radius:6px;
+  }
+  .word-ko{font-size:14.5px;font-weight:700;color:var(--brand-deep);margin-left:auto;}
+  .word-ex{
+    font-size:13px;color:var(--ink-soft);margin-top:8px;line-height:1.55;
+    padding-left:11px;border-left:2px solid var(--line-strong);
+  }
+  .word-ex .exko{display:block;color:var(--ink-faint);font-size:12.5px;margin-top:2px;}
+
+  /* 어법 / 표현 카드 */
+  .card{
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--r-sm);padding:15px 16px;margin-bottom:11px;
+    box-shadow:var(--shadow-sm);
+  }
+  .card-title{
+    display:flex;align-items:center;gap:8px;
+    font-size:15.5px;font-weight:800;margin:0 0 7px;letter-spacing:-.2px;
+  }
+  .tagno{
+    font-size:11px;font-weight:800;color:#fff;
+    background:var(--c-gram);border-radius:7px;
+    padding:3px 8px;flex:0 0 auto;
+  }
+  .expr .tagno{background:var(--c-expr);}
+  .card p{margin:0 0 8px;font-size:13.5px;color:var(--ink-soft);line-height:1.62;}
+  .card p:last-child{margin-bottom:0;}
+  .ex{
+    background:var(--surface-2);border:1px solid var(--line);
+    border-radius:10px;padding:10px 12px;margin-top:9px;
+  }
+  .ex .en{font-size:13.5px;font-weight:600;color:var(--ink);line-height:1.5;}
+  .ex .ko{font-size:12.5px;color:var(--ink-faint);margin-top:3px;line-height:1.5;}
+  .hl{color:var(--c-gram);font-weight:800;}
+  .expr .hl{color:var(--c-expr);}
+  .tip{
+    display:flex;gap:7px;font-size:12.5px;color:var(--ink-soft);
+    margin-top:9px;line-height:1.55;
+  }
+  .tip b{color:var(--brand-deep);}
+
+  /* 표현: 패턴 헤더 */
+  .expr .card-title .pat{color:var(--c-expr);}
+
+  /* 요약 */
+  .sumcard{
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--r);padding:18px;box-shadow:var(--shadow-sm);
+    margin-bottom:12px;
+  }
+  .oneline{
+    background:linear-gradient(135deg,var(--c-sum-soft),#fff);
+    border:1px solid var(--line);border-left:4px solid var(--c-sum);
+    border-radius:12px;padding:14px 16px;margin-bottom:14px;
+  }
+  .oneline .lb{font-size:11px;font-weight:800;color:var(--c-sum);letter-spacing:.4px;}
+  .oneline p{margin:5px 0 0;font-size:15px;font-weight:700;color:var(--ink);line-height:1.55;}
+  .beat{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line);}
+  .beat:first-of-type{border-top:0;padding-top:2px;}
+  .beat .st{
+    flex:0 0 auto;font-size:11px;font-weight:800;color:#fff;
+    background:var(--c-sum);border-radius:8px;padding:5px 9px;height:fit-content;
+    min-width:44px;text-align:center;
+  }
+  .beat .bt{font-size:14px;color:var(--ink-soft);line-height:1.6;}
+  .beat .bt b{color:var(--ink);font-weight:800;}
+  .theme{
+    margin-top:14px;background:var(--surface-2);
+    border:1px dashed var(--line-strong);border-radius:12px;padding:13px 15px;
+  }
+  .theme .lb{font-size:12px;font-weight:800;color:var(--brand-deep);}
+  .theme p{margin:5px 0 0;font-size:13.5px;color:var(--ink-soft);line-height:1.62;}
+
+  .notice{
+    display:flex;gap:8px;font-size:12px;color:var(--ink-faint);
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:10px;padding:11px 13px;margin-top:14px;line-height:1.55;
+  }
+
+  /* ── CTA ── */
+  .cta-wrap{margin-top:26px;}
+  .cta{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    background:linear-gradient(135deg,#2f55d4,#3b63e0);
+    color:#fff;font-size:16px;font-weight:800;letter-spacing:-.2px;
+    padding:17px 20px;border-radius:16px;
+    box-shadow:0 12px 28px rgba(47,85,212,.34);min-height:56px;
+  }
+  .cta:active{transform:translateY(1px);}
+  .cta .arw{font-size:18px;}
+  .cta-sub{
+    text-align:center;font-size:12.5px;color:var(--ink-faint);margin-top:10px;
+  }
+  .backlist{
+    display:block;text-align:center;margin-top:14px;
+    font-size:13.5px;font-weight:700;color:var(--brand-deep);
+    padding:12px;border-radius:12px;border:1px solid var(--line);
+    background:var(--surface);min-height:46px;
+  }
+  .backlist:active{transform:scale(.99);}
+
+  footer{
+    text-align:center;color:var(--ink-faint);font-size:11.5px;
+    margin-top:28px;line-height:1.6;
+  }
+
+  @media (max-width:400px){
+    .hero h1{font-size:23px;}
+    .tab{font-size:12px;}
+    .word-en{font-size:16px;}
+    .sec-head h2{font-size:16px;}
+  }
+</style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="topbar-in">
+      <a class="back" href="high2-ne-passage.html">‹ 목록</a>
+      <span class="topbar-title">능률 영어1 · Lesson 1 지문정리</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- Hero -->
+    <section class="hero">
+      <span class="hero-eyebrow">LESSON 1 · 지문정리</span>
+      <h1>A Spark in You</h1>
+      <p class="reading">본문 <b>“Can I Swim?”</b> — 펭귄 Juan Salvado와 소년 Diego 이야기</p>
+      <p class="hero-desc">본문을 외우기 전에, 시험에 나오는 핵심만 먼저 정리하세요. 단어·어법·표현·내용 순서로 훑고, 아래 버튼에서 OX로 바로 확인합니다.</p>
+      <div class="hero-meta">
+        <span class="chip">📘 <span class="num">핵심 단어 14</span></span>
+        <span class="chip">✍️ <span class="num">주요 어법 5</span></span>
+        <span class="chip">💬 <span class="num">핵심 표현 8</span></span>
+      </div>
+    </section>
+
+    <!-- Tabs -->
+    <div class="tabbar">
+      <div class="tabs" role="tablist" aria-label="지문정리 탭">
+        <button class="tab" role="tab" aria-selected="true"  aria-controls="p-word" id="t-word"><span class="ti">📘</span>핵심 단어</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p-gram" id="t-gram"><span class="ti">✍️</span>주요 어법</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p-expr" id="t-expr"><span class="ti">💬</span>핵심 표현</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p-sum"  id="t-sum"><span class="ti">📝</span>내용 요약</button>
+      </div>
+    </div>
+
+    <!-- Panel: 핵심 단어 -->
+    <section class="panel active" id="p-word" role="tabpanel" aria-labelledby="t-word">
+      <div class="sec-head">
+        <span class="sec-dot" style="background:var(--c-word)"></span>
+        <h2>핵심 단어</h2>
+        <span class="cnt">14개</span>
+      </div>
+
+      <div class="word">
+        <div class="word-top"><span class="word-en">rescue</span><span class="word-pos">동·명</span><span class="word-ko">구조하다; 구조</span></div>
+        <div class="word-ex">They tried to <b>rescue</b> the trapped penguin.<span class="exko">그들은 갇힌 펭귄을 구조하려 했다.</span></div>
+      </div>
+
+      <div class="word">
+        <div class="word-top"><span class="word-en">covered</span><span class="word-pos">형</span><span class="word-ko">뒤덮인</span></div>
+        <div class="word-ex">The bird was <b>covered</b> with thick oil.<span class="exko">그 새는 두꺼운 기름으로 뒤덮여 있었다.</span></div>
+      </div>
+
+      <div class="word">
+        <div class="word-top"><span class="word-en">feather</span><span class="word-pos">명</span><span class="word-ko">깃털</span></div>
+        <div class="word-ex">He gently cleaned every <b>feather</b>.<span class="exko">그는 깃털 하나하나를 조심스럽게 닦았다.</span></div>
+      </div>
+
+      <div class="word">
+        <div class="word-top"><span class="word-en">companion</span><span class="word-pos">명</span><span class="word-ko">동반자, 친구</span></div>
+        <div class="word-ex">The penguin became his loyal <b>companion</b>.<span class="exko">그 펭귄은 그의 충실한 동반자가 되었다.</span></div>
+      </div>
+
+      <div class="word">
+        <div class="word-top"><span class="word-en">confidence</span><span class="word-pos">명</span><span class="word-ko">자신감</span></div>
+        <div class="word-ex">Diego slowly gained <b>confidence</b>.<span class="exko">Diego는 서서히 자신감을 얻었다.</span></div>
+      </div>
+
+      <div class="word">
+        <div class="word-top"><span class="word-en">encourage</span><span class="word-pos">동</span><span class="word-ko">격려하다, 용기를 주다</span></div>
+        <div class="word-ex">Everyone <b>encouraged</b> him to try again.<span class="exko">모두가 그에게 다시 해보라고 격려했다.</span></div>
+      </div>
+
+      <div class="word">
+        <div class="word-top"><span class="word-en">gradually</span><span class="word-pos">부</span><span class="word-ko">점차, 서서히</span></div>
+        <div class="word-ex">He <b>gradually</b> learned to trust the water.<span class="exko">그는 점차 물을 믿는 법을 배웠다.</span></div>
+      </div>
+
+      <div class="word">
+        <div class="word-top"><span class="word-en">reluctant</span><span class="word-pos">형</span><span class="word-ko">꺼리는, 주저하는</span></div>
+        <div class="word-ex">At first he was <b>reluctant</b> to jump in.<span class="exko">처음에 그는 뛰어들기를 주저했다.</span></div>
+      </div>
+
+      <div class="word">
+        <div class="word-top"><span class="word-en">determined</span><span class="word-pos">형</span><span class="word-ko">단단히 결심한</span></div>
+        <div class="word-ex">She looked <b>determined</b> to finish.<span class="exko">그녀는 끝까지 해내겠다고 결심한 표정이었다.</span></div>
+      </div>
+
+      <div class="word">
+        <div class="word-top"><span class="word-en">overcome</span><span class="word-pos">동</span><span class="word-ko">극복하다</span></div>
+        <div class="word-ex">He <b>overcame</b> his fear of deep water.<span class="exko">그는 깊은 물에 대한 두려움을 극복했다.</span></div>
+      </div>
+
+      <div class="word">
+        <div class="word-top"><span class="word-en">timid</span><span class="word-pos">형</span><span class="word-ko">소심한, 겁많은</span></div>
+        <div class="word-ex">The <b>timid</b> boy rarely spoke in class.<span class="exko">그 소심한 소년은 수업에서 거의 말하지 않았다.</span></div>
+      </div>
+
+      <div class="word">
+        <div class="word-top"><span class="word-en">potential</span><span class="word-pos">명·형</span><span class="word-ko">잠재력; 잠재적인</span></div>
+        <div class="word-ex">Each student has hidden <b>potential</b>.<span class="exko">모든 학생에게는 숨은 잠재력이 있다.</span></div>
+      </div>
+
+      <div class="word">
+        <div class="word-top"><span class="word-en">spark</span><span class="word-pos">명</span><span class="word-ko">불꽃; (재능의) 불씨</span></div>
+        <div class="word-ex">A small <b>spark</b> can start something great.<span class="exko">작은 불씨가 위대한 것을 시작할 수 있다.</span></div>
+      </div>
+
+      <div class="word">
+        <div class="word-top"><span class="word-en">remarkable</span><span class="word-pos">형</span><span class="word-ko">놀라운, 주목할 만한</span></div>
+        <div class="word-ex">His change was truly <b>remarkable</b>.<span class="exko">그의 변화는 정말 놀라웠다.</span></div>
+      </div>
+    </section>
+
+    <!-- Panel: 주요 어법 -->
+    <section class="panel" id="p-gram" role="tabpanel" aria-labelledby="t-gram">
+      <div class="sec-head">
+        <span class="sec-dot" style="background:var(--c-gram)"></span>
+        <h2>주요 어법</h2>
+        <span class="cnt">5개</span>
+      </div>
+
+      <div class="card">
+        <p class="card-title"><span class="tagno">어법 1</span>주격 관계대명사 who / which / that</p>
+        <p>사람은 <b>who</b>, 사물·동물은 <b>which</b>, 둘 다 <b>that</b>으로 받아 앞의 명사(선행사)를 꾸며 줍니다. 관계대명사 뒤에는 <b>동사</b>가 바로 옵니다.</p>
+        <div class="ex">
+          <div class="en">The man <span class="hl">who</span> found the penguin was a teacher.</div>
+          <div class="ko">그 펭귄을 발견한 남자는 교사였다.</div>
+        </div>
+        <p class="tip">💡 <span><b>선행사가 사람인지 사물인지</b> 먼저 확인하면 who/which 선택이 쉬워집니다.</span></p>
+      </div>
+
+      <div class="card">
+        <p class="card-title"><span class="tagno">어법 2</span>분사로 명사 꾸미기 (-ing / p.p.)</p>
+        <p>능동·진행이면 <b>현재분사(-ing)</b>, 수동·완료이면 <b>과거분사(p.p.)</b>를 씁니다. 뒤에서 명사를 꾸밀 때가 많습니다.</p>
+        <div class="ex">
+          <div class="en">a penguin <span class="hl">covered</span> with oil / the boy <span class="hl">swimming</span> alone</div>
+          <div class="ko">기름에 뒤덮인 펭귄 / 혼자 헤엄치는 소년</div>
+        </div>
+        <p class="tip">💡 <span>명사가 <b>동작을 하면</b> -ing, <b>동작을 당하면</b> p.p.</span></p>
+      </div>
+
+      <div class="card">
+        <p class="card-title"><span class="tagno">어법 3</span>help + (to) 동사원형</p>
+        <p><b>help</b>는 목적격보어로 <b>동사원형</b> 또는 <b>to부정사</b>를 모두 취할 수 있습니다. <span style="white-space:nowrap">「help + 목적어 + (to)동사원형」</span> 형태에 주의하세요.</p>
+        <div class="ex">
+          <div class="en">The penguin helped Diego <span class="hl">(to) swim</span> again.</div>
+          <div class="ko">그 펭귄은 Diego가 다시 헤엄치도록 도왔다.</div>
+        </div>
+        <p class="tip">💡 <span>같은 유형: make/let/have + 목적어 + <b>동사원형</b></span></p>
+      </div>
+
+      <div class="card">
+        <p class="card-title"><span class="tagno">어법 4</span>과거완료 (had + p.p.)</p>
+        <p>과거의 어느 시점보다 <b>더 이전</b>에 일어난 일을 나타낼 때 씁니다. 이야기에서 '먼저 있었던 일'을 표시합니다.</p>
+        <div class="ex">
+          <div class="en">He realized the penguin <span class="hl">had followed</span> him home.</div>
+          <div class="ko">그는 펭귄이 (이미) 자기를 따라 집까지 왔다는 걸 깨달았다.</div>
+        </div>
+        <p class="tip">💡 <span>두 과거 사건의 <b>순서</b>를 물으면 과거완료가 답일 때가 많습니다.</span></p>
+      </div>
+
+      <div class="card">
+        <p class="card-title"><span class="tagno">어법 5</span>to부정사의 부사적 용법 (목적)</p>
+        <p>'~하기 위해'라는 <b>목적</b>을 나타냅니다. <b>in order to</b> / <b>so as to</b>로 바꿔 쓸 수 있습니다.</p>
+        <div class="ex">
+          <div class="en">He jumped in <span class="hl">to save</span> the little bird.</div>
+          <div class="ko">그는 그 작은 새를 구하기 위해 뛰어들었다.</div>
+        </div>
+        <p class="tip">💡 <span>목적의 to부정사는 문장 앞·뒤 <b>어디에나</b> 올 수 있습니다.</span></p>
+      </div>
+    </section>
+
+    <!-- Panel: 핵심 표현 -->
+    <section class="panel expr" id="p-expr" role="tabpanel" aria-labelledby="t-expr">
+      <div class="sec-head">
+        <span class="sec-dot" style="background:var(--c-expr)"></span>
+        <h2>핵심 표현</h2>
+        <span class="cnt">8개</span>
+      </div>
+
+      <div class="card">
+        <p class="card-title"><span class="tagno">1</span><span class="pat">be attached to ~</span></p>
+        <p>~에 <b>애착을 느끼다</b>, 정이 들다</p>
+        <div class="ex"><div class="en">He grew <span class="hl">attached to</span> the penguin.</div><div class="ko">그는 그 펭귄에게 정이 들었다.</div></div>
+      </div>
+
+      <div class="card">
+        <p class="card-title"><span class="tagno">2</span><span class="pat">take care of ~</span></p>
+        <p>~을 <b>돌보다</b>, 보살피다</p>
+        <div class="ex"><div class="en">He <span class="hl">took care of</span> the bird for weeks.</div><div class="ko">그는 몇 주 동안 그 새를 돌봤다.</div></div>
+      </div>
+
+      <div class="card">
+        <p class="card-title"><span class="tagno">3</span><span class="pat">give up</span></p>
+        <p><b>포기하다</b></p>
+        <div class="ex"><div class="en">Diego almost <span class="hl">gave up</span> swimming.</div><div class="ko">Diego는 수영을 거의 포기할 뻔했다.</div></div>
+      </div>
+
+      <div class="card">
+        <p class="card-title"><span class="tagno">4</span><span class="pat">little by little</span></p>
+        <p><b>조금씩</b>, 점차</p>
+        <div class="ex"><div class="en"><span class="hl">Little by little</span>, he lost his fear.</div><div class="ko">조금씩 그는 두려움을 잃어 갔다.</div></div>
+      </div>
+
+      <div class="card">
+        <p class="card-title"><span class="tagno">5</span><span class="pat">end up -ing</span></p>
+        <p>결국 <b>~하게 되다</b></p>
+        <div class="ex"><div class="en">He <span class="hl">ended up</span> loving the water.</div><div class="ko">그는 결국 물을 좋아하게 되었다.</div></div>
+      </div>
+
+      <div class="card">
+        <p class="card-title"><span class="tagno">6</span><span class="pat">can't help -ing</span></p>
+        <p>~하지 <b>않을 수 없다</b></p>
+        <div class="ex"><div class="en">She <span class="hl">couldn't help</span> smiling at him.</div><div class="ko">그녀는 그에게 미소 짓지 않을 수 없었다.</div></div>
+      </div>
+
+      <div class="card">
+        <p class="card-title"><span class="tagno">7</span><span class="pat">no matter how ~</span></p>
+        <p>아무리 <b>~해도</b></p>
+        <div class="ex"><div class="en"><span class="hl">No matter how</span> hard it was, he kept trying.</div><div class="ko">아무리 힘들어도 그는 계속 시도했다.</div></div>
+      </div>
+
+      <div class="card">
+        <p class="card-title"><span class="tagno">8</span><span class="pat">bring out the best in ~</span></p>
+        <p>~의 <b>최고의 모습을 끌어내다</b></p>
+        <div class="ex"><div class="en">The penguin <span class="hl">brought out the best in</span> Diego.</div><div class="ko">그 펭귄은 Diego의 최고의 모습을 끌어냈다.</div></div>
+      </div>
+    </section>
+
+    <!-- Panel: 내용 요약 -->
+    <section class="panel" id="p-sum" role="tabpanel" aria-labelledby="t-sum">
+      <div class="sec-head">
+        <span class="sec-dot" style="background:var(--c-sum)"></span>
+        <h2>내용 요약</h2>
+      </div>
+
+      <div class="sumcard">
+        <div class="oneline">
+          <span class="lb">ONE-LINE</span>
+          <p>기름에 뒤덮인 펭귄을 구조한 일이, 소심하던 소년 Diego의 숨은 '불씨'를 깨운다.</p>
+        </div>
+
+        <div class="beat">
+          <span class="st">도입</span>
+          <div class="bt"><b>구조.</b> 해변에서 기름에 뒤덮인 펭귄을 발견한 '나'는 그를 데려와 깃털을 하나하나 닦아 살려 낸다. 펭귄은 Juan Salvado라는 이름을 얻고 곁을 떠나지 않는다.</div>
+        </div>
+
+        <div class="beat">
+          <span class="st">전개</span>
+          <div class="bt"><b>만남.</b> 학교에서 지내게 된 펭귄은, 물을 무서워하고 늘 주저하던 소심한 소년 <b>Diego</b>와 가까워진다. Diego는 펭귄을 돌보며 조금씩 마음을 연다.</div>
+        </div>
+
+        <div class="beat">
+          <span class="st">절정</span>
+          <div class="bt"><b>도전.</b> 펭귄과 함께 물가에 선 Diego는 두려움을 이겨 내고 마침내 스스로 헤엄친다. "Can I Swim?"이라는 물음이 "나도 할 수 있다"는 확신으로 바뀐다.</div>
+        </div>
+
+        <div class="beat">
+          <span class="st">마무리</span>
+          <div class="bt"><b>변화.</b> 작은 계기 하나가 Diego의 자신감을 끌어올린다. 주위 사람들은 그의 놀라운 변화를 지켜본다.</div>
+        </div>
+
+        <div class="theme">
+          <span class="lb">🎯 주제 (Theme)</span>
+          <p>누구에게나 안에는 '불씨(a spark)'가 있다. 작은 관심과 격려, 그리고 한 번의 용기가 그 불씨를 재능과 자신감으로 피어나게 한다.</p>
+        </div>
+      </div>
+
+      <div class="notice">
+        <span>ℹ️</span>
+        <span>교과서 본문 원문은 저작권 보호를 받아 이 페이지에 싣지 않았습니다. 위 내용은 학습용 요약·정리입니다.</span>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-wrap">
+      <a class="cta" href="high2-english1-lesson1.html">
+        <span>Lesson 1 OX 풀러 가기</span><span class="arw">›</span>
+      </a>
+      <p class="cta-sub">정리한 내용을 OX 문제로 바로 점검하세요.</p>
+      <a class="backlist" href="high2-ne-passage.html">‹ 능률 영어1 레슨 목록으로</a>
+    </div>
+
+    <footer>
+      JANICE의 영어 관리 시스템 · 능률 영어1<br />Lesson 1 「A Spark in You」 지문정리
+    </footer>
+
+  </div>
+
+<script>
+  (function(){
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+    var panels = {
+      'p-word': document.getElementById('p-word'),
+      'p-gram': document.getElementById('p-gram'),
+      'p-expr': document.getElementById('p-expr'),
+      'p-sum':  document.getElementById('p-sum')
+    };
+    function select(tab){
+      tabs.forEach(function(t){ t.setAttribute('aria-selected', t === tab ? 'true' : 'false'); });
+      Object.keys(panels).forEach(function(id){
+        var on = (id === tab.getAttribute('aria-controls'));
+        panels[id].classList.toggle('active', on);
+      });
+      // 탭 전환 시 패널 상단이 탭바 아래로 오도록 살짝 스크롤 보정
+      var tabbarBottom = document.querySelector('.tabbar').getBoundingClientRect().bottom;
+      if (tabbarBottom < 0) { window.scrollTo({ top: 0 }); }
+    }
+    tabs.forEach(function(tab){
+      tab.addEventListener('click', function(){ select(tab); });
+      tab.addEventListener('keydown', function(e){
+        var i = tabs.indexOf(tab);
+        if (e.key === 'ArrowRight'){ e.preventDefault(); tabs[(i+1) % tabs.length].focus(); }
+        else if (e.key === 'ArrowLeft'){ e.preventDefault(); tabs[(i-1+tabs.length) % tabs.length].focus(); }
+        else if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); select(tab); }
+      });
+    });
+  })();
+</script>
+</body>
+</html>
