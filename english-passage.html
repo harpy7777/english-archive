@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="theme-color" content="#2f55d4" />
+<title>JANICE의 영어 관리 시스템 · 영어 지문정리</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 140'><polygon points='70,8 121,38 121,102 70,132 19,102 19,38' fill='none' stroke='%232f55d4' stroke-width='8' stroke-linejoin='round'/><polygon points='70,38 97,53 97,87 70,102 43,87 43,53' fill='none' stroke='%232f55d4' stroke-width='4' stroke-linejoin='round' stroke-dasharray='10 6'/><circle cx='70' cy='8' r='10' fill='%232f55d4'/><circle cx='121' cy='38' r='10' fill='%232f55d4'/><circle cx='121' cy='102' r='10' fill='%232f55d4'/><circle cx='70' cy='132' r='10' fill='%232f55d4'/><circle cx='19' cy='102' r='10' fill='%232f55d4'/><circle cx='19' cy='38' r='10' fill='%232f55d4'/></svg>" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  :root{
+    --royal:#2f55d4; --royal-deep:#1e3a9e; --royal-light:#4169e1;
+    --royal-pale:#dbe3f8; --royal-soft:#eef2fc;
+    --border:#dbe3f8; --border-soft:#e6ebf6;
+    --ink:#1d1d1f; --ink-soft:#6e6e73; --ink-faint:#aeaeb2;
+    --safe-top:env(safe-area-inset-top,0px);
+    --safe-bottom:env(safe-area-inset-bottom,0px);
+    --safe-left:env(safe-area-inset-left,0px);
+    --safe-right:env(safe-area-inset-right,0px);
+    --font:"Pretendard",-apple-system,BlinkMacSystemFont,system-ui,'Apple SD Gothic Neo','Helvetica Neue',Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+  body{
+    font-family:var(--font);
+    background:#fafafa;color:var(--ink);min-height:100vh;
+    -webkit-font-smoothing:antialiased;overscroll-behavior:none;
+    word-break:keep-all;
+  }
+
+  /* ── Header ── */
+  .header{
+    background:rgba(255,255,255,.92);
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border-soft);
+    padding:0 1rem;
+    padding-left:max(1rem,var(--safe-left));
+    padding-right:max(1rem,var(--safe-right));
+    padding-top:var(--safe-top);
+    height:calc(54px + var(--safe-top));
+    display:flex;align-items:center;justify-content:space-between;
+    position:sticky;top:0;z-index:300;
+  }
+  .header-left{display:flex;align-items:center;gap:9px;text-decoration:none;color:inherit;cursor:pointer;transition:opacity .15s;min-width:0;}
+  .header-left:hover{opacity:.75;}
+  .logo-mark{
+    width:30px;height:30px;flex-shrink:0;border-radius:8px;
+    background:linear-gradient(135deg,#5b7bef 0%,#2f55d4 100%);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .brand-name{font-size:clamp(11px,3vw,14px);font-weight:600;color:var(--ink);letter-spacing:-.3px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .header-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .header-badge{
+    display:flex;align-items:center;gap:5px;
+    background:#f0fdf4;border:1px solid #bbf7d0;border-radius:20px;
+    padding:4px 10px;font-size:10px;font-weight:600;color:#16a34a;white-space:nowrap;
+  }
+  .dot-green{width:5px;height:5px;background:#22c55e;border-radius:50%;animation:blink 2s ease-in-out infinite;flex-shrink:0;}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+  .back-btn{
+    padding:7px 14px;min-height:36px;background:transparent;
+    border:1.5px solid var(--border);border-radius:20px;font-family:inherit;
+    font-size:12px;font-weight:600;color:var(--royal-deep);cursor:pointer;white-space:nowrap;transition:background .15s;
+  }
+  .back-btn:hover{background:var(--royal-soft);}
+  .back-btn:active{background:var(--royal-pale);}
+
+  /* ── Layout ── */
+  .wrap{
+    max-width:1000px;margin:0 auto;
+    padding:1.2rem 0.9rem 4rem;
+    padding-bottom:max(4rem,calc(3rem + var(--safe-bottom)));
+    padding-left:max(0.9rem,var(--safe-left));
+    padding-right:max(0.9rem,var(--safe-right));
+  }
+
+  /* ── Breadcrumb ── */
+  .breadcrumb{display:flex;align-items:center;gap:6px;margin-bottom:1.2rem;flex-wrap:wrap;}
+  .bc-item{font-size:12px;color:var(--ink-faint);font-weight:500;text-decoration:none;transition:color .15s;}
+  .bc-item:hover{color:var(--royal);}
+  .bc-sep{font-size:12px;color:#d1d1d6;}
+  .bc-current{font-size:12px;color:var(--ink);font-weight:700;}
+
+  /* ── Welcome bar ── */
+  .welcome-bar{
+    background:linear-gradient(135deg,var(--royal-soft) 0%,#eef4ff 60%,#f0f7ff 100%);
+    border:1px solid var(--border);border-radius:18px;
+    padding:1.2rem 1.4rem;margin-bottom:1.5rem;
+    display:flex;align-items:center;gap:12px;
+  }
+  .welcome-avatar{
+    width:46px;height:46px;border-radius:50%;flex-shrink:0;
+    background:linear-gradient(135deg,#5b7bef,#1e3a9e);
+    display:flex;align-items:center;justify-content:center;font-size:20px;
+    box-shadow:0 4px 12px rgba(47,85,212,.25);
+  }
+  .welcome-greeting{font-size:1.05rem;font-weight:700;letter-spacing:-.03em;}
+  .welcome-sub{font-size:11px;color:var(--ink-soft);margin-top:3px;}
+
+  .section-heading{
+    font-size:11px;font-weight:700;color:var(--ink-faint);
+    letter-spacing:.08em;text-transform:uppercase;margin-bottom:0.8rem;
+  }
+
+  /* ── 영어1 / 영어2 grid ── */
+  .eng-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.6rem;}
+  .eng-block{
+    background:#fff;border:1px solid var(--border);border-radius:20px;overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+
+  /* 배너 */
+  .eng-banner{
+    height:96px;display:flex;align-items:center;justify-content:space-between;
+    padding:0 1.4rem;position:relative;overflow:hidden;
+  }
+  .eng-banner-1{background:linear-gradient(135deg,#3b63e0 0%,#1e3a9e 100%);}
+  .eng-banner-2{background:linear-gradient(135deg,#5b46d4 0%,#3320a0 100%);}
+  .eng-banner::before{content:'';position:absolute;right:-30px;bottom:-30px;width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,.07);}
+  .eng-banner::after{content:'';position:absolute;right:34px;top:-22px;width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.05);}
+  .eng-banner-label{font-size:10px;font-weight:700;color:rgba(255,255,255,.72);letter-spacing:.14em;text-transform:uppercase;}
+  .eng-banner-title{font-size:23px;font-weight:800;color:#fff;letter-spacing:-.04em;margin-top:2px;}
+  .eng-banner-icon{font-size:36px;opacity:.9;position:relative;z-index:1;}
+
+  /* 출판사 리스트 */
+  .pub-body{padding:1rem 1rem 1.1rem;flex:1;}
+  .pub-hint{font-size:11px;color:var(--ink-faint);font-weight:600;margin:0 2px 9px;letter-spacing:.02em;}
+  .pub-list{display:flex;flex-direction:column;gap:8px;}
+
+  .pub-card{
+    --pc:#2f55d4; --ps:#eef2fc;
+    display:flex;align-items:center;gap:11px;
+    padding:11px 12px;border-radius:13px;
+    background:#fff;border:1px solid var(--border-soft);
+    text-decoration:none;color:inherit;cursor:pointer;
+    min-height:56px;transition:transform .15s,box-shadow .15s,border-color .15s,background .15s;
+  }
+  .pub-card:hover{transform:translateY(-2px);border-color:var(--pc);box-shadow:0 8px 20px rgba(47,85,212,.12);}
+  .pub-card:active{transform:scale(.98);}
+  .pub-mark{
+    width:38px;height:38px;flex-shrink:0;border-radius:10px;
+    background:var(--ps);color:var(--pc);
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;font-weight:800;letter-spacing:-.02em;text-align:center;line-height:1.1;
+  }
+  .pub-info{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1;}
+  .pub-name{font-size:14px;font-weight:700;color:var(--ink);letter-spacing:-.02em;}
+  .pub-sub{font-size:11px;color:var(--ink-faint);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .pub-badge{font-size:9.5px;font-weight:800;padding:3px 9px;border-radius:20px;white-space:nowrap;flex-shrink:0;letter-spacing:.02em;}
+  .pub-badge.live{background:#e7fdf0;color:#0d9f6e;}
+  .pub-badge.soon{background:#f1f3f7;color:#9aa3b2;}
+
+  /* 준비중 카드 */
+  .pub-card.is-soon{cursor:default;background:#fbfcfe;border-style:dashed;}
+  .pub-card.is-soon:hover{transform:none;box-shadow:none;border-color:var(--border-soft);}
+  .pub-card.is-soon .pub-mark{background:#f1f3f7;color:#aeb6c4;}
+  .pub-card.is-soon .pub-name{color:#8a93a3;}
+
+  /* ── 안내 패널 ── */
+  .info-panel{
+    background:#fff;border:1px solid var(--border-soft);border-radius:16px;
+    padding:1.1rem 1.2rem;display:flex;gap:11px;align-items:flex-start;
+  }
+  .info-panel .ic{font-size:18px;line-height:1;flex-shrink:0;margin-top:1px;}
+  .info-panel p{font-size:12.5px;color:var(--ink-soft);line-height:1.7;}
+  .info-panel b{color:var(--royal-deep);font-weight:700;}
+
+  .footer{
+    text-align:center;padding:1.4rem 1rem;
+    padding-bottom:calc(1.4rem + var(--safe-bottom));
+    font-size:11px;color:#c7c7cc;border-top:1px solid #f2f4f8;letter-spacing:.02em;margin-top:1.6rem;
+  }
+
+  /* ── 반응형 ── */
+  @media (max-width:700px){
+    .eng-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:520px){
+    .wrap{padding:1rem 0.75rem 4rem;}
+    .eng-banner{height:82px;padding:0 1.1rem;}
+    .eng-banner-title{font-size:20px;}
+    .eng-banner-icon{font-size:30px;}
+    .header-badge .dot-green{display:none;}
+    .header-badge{font-size:9px;padding:3px 8px;}
+    .welcome-bar{padding:1rem 1.1rem;}
+    .pub-sub{font-size:10.5px;}
+  }
+  @media (max-width:360px){
+    .pub-mark{width:34px;height:34px;font-size:11px;}
+    .pub-name{font-size:13px;}
+    .pub-card{padding:10px;gap:9px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="header">
+  <a href="index.html" class="header-left">
+    <div class="logo-mark">
+      <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+        <circle cx="9" cy="7" r="3" fill="rgba(255,255,255,0.9)"/>
+        <path d="M3.5 16c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5" stroke="rgba(255,255,255,0.9)" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+      </svg>
+    </div>
+    <span class="brand-name">JANICE의 영어 관리 시스템</span>
+  </a>
+  <div class="header-right">
+    <div class="header-badge"><span class="dot-green"></span>ONLINE</div>
+    <button class="back-btn" onclick="history.back()">← 뒤로</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- 브레드크럼 -->
+  <div class="breadcrumb">
+    <a href="index.html" class="bc-item">🏠 홈</a>
+    <span class="bc-sep">›</span>
+    <span class="bc-current">📖 영어 지문정리</span>
+  </div>
+
+  <!-- 환영 바 -->
+  <div class="welcome-bar">
+    <div class="welcome-avatar">📖</div>
+    <div>
+      <div class="welcome-greeting">영어 지문정리</div>
+      <div class="welcome-sub">과목 · 출판사를 선택하면 레슨별 지문정리로 이동합니다</div>
+    </div>
+  </div>
+
+  <!-- 과목/출판사 선택 -->
+  <div class="section-heading">SUBJECT &amp; PUBLISHER</div>
+  <div class="eng-grid">
+
+    <!-- 영어 1 -->
+    <section class="eng-block">
+      <div class="eng-banner eng-banner-1">
+        <div>
+          <div class="eng-banner-label">English I</div>
+          <div class="eng-banner-title">영어 1</div>
+        </div>
+        <div class="eng-banner-icon">📘</div>
+      </div>
+      <div class="pub-body">
+        <p class="pub-hint">출판사를 선택하세요</p>
+        <div class="pub-list">
+
+          <div class="pub-card is-soon" style="--pc:#2f55d4;--ps:#eef2fc;" aria-disabled="true">
+            <span class="pub-mark">YBM</span>
+            <span class="pub-info"><span class="pub-name">YBM</span><span class="pub-sub">지문 · OX</span></span>
+            <span class="pub-badge soon">준비중</span>
+          </div>
+
+          <a class="pub-card" href="high2-ne-passage.html" style="--pc:#4f46e5;--ps:#eef0fe;">
+            <span class="pub-mark">능률</span>
+            <span class="pub-info"><span class="pub-name">NE능률</span><span class="pub-sub">지문 · OX</span></span>
+            <span class="pub-badge live">바로가기</span>
+          </a>
+
+          <div class="pub-card is-soon" style="--pc:#0284c7;--ps:#eff8fe;" aria-disabled="true">
+            <span class="pub-mark">동아</span>
+            <span class="pub-info"><span class="pub-name">동아출판</span><span class="pub-sub">지문 · OX</span></span>
+            <span class="pub-badge soon">준비중</span>
+          </div>
+
+          <div class="pub-card is-soon" style="--pc:#0d9488;--ps:#f0fbf9;" aria-disabled="true">
+            <span class="pub-mark">비상</span>
+            <span class="pub-info"><span class="pub-name">비상교육</span><span class="pub-sub">지문 · OX</span></span>
+            <span class="pub-badge soon">준비중</span>
+          </div>
+
+          <div class="pub-card is-soon" style="--pc:#7c3aed;--ps:#f5f0fe;" aria-disabled="true">
+            <span class="pub-mark">천재</span>
+            <span class="pub-info"><span class="pub-name">천재교육</span><span class="pub-sub">지문 · OX</span></span>
+            <span class="pub-badge soon">준비중</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 영어 2 -->
+    <section class="eng-block">
+      <div class="eng-banner eng-banner-2">
+        <div>
+          <div class="eng-banner-label">English II</div>
+          <div class="eng-banner-title">영어 2</div>
+        </div>
+        <div class="eng-banner-icon">📚</div>
+      </div>
+      <div class="pub-body">
+        <p class="pub-hint">출판사를 선택하세요</p>
+        <div class="pub-list">
+
+          <div class="pub-card is-soon" style="--pc:#2f55d4;--ps:#eef2fc;" aria-disabled="true">
+            <span class="pub-mark">YBM</span>
+            <span class="pub-info"><span class="pub-name">YBM</span><span class="pub-sub">지문 · OX</span></span>
+            <span class="pub-badge soon">준비중</span>
+          </div>
+
+          <div class="pub-card is-soon" style="--pc:#4f46e5;--ps:#eef0fe;" aria-disabled="true">
+            <span class="pub-mark">능률</span>
+            <span class="pub-info"><span class="pub-name">NE능률</span><span class="pub-sub">지문 · OX</span></span>
+            <span class="pub-badge soon">준비중</span>
+          </div>
+
+          <div class="pub-card is-soon" style="--pc:#0284c7;--ps:#eff8fe;" aria-disabled="true">
+            <span class="pub-mark">동아</span>
+            <span class="pub-info"><span class="pub-name">동아출판</span><span class="pub-sub">지문 · OX</span></span>
+            <span class="pub-badge soon">준비중</span>
+          </div>
+
+          <div class="pub-card is-soon" style="--pc:#0d9488;--ps:#f0fbf9;" aria-disabled="true">
+            <span class="pub-mark">비상</span>
+            <span class="pub-info"><span class="pub-name">비상교육</span><span class="pub-sub">지문 · OX</span></span>
+            <span class="pub-badge soon">준비중</span>
+          </div>
+
+          <div class="pub-card is-soon" style="--pc:#7c3aed;--ps:#f5f0fe;" aria-disabled="true">
+            <span class="pub-mark">천재</span>
+            <span class="pub-info"><span class="pub-name">천재교육</span><span class="pub-sub">지문 · OX</span></span>
+            <span class="pub-badge soon">준비중</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- 안내 -->
+  <div class="info-panel">
+    <span class="ic">ℹ️</span>
+    <p>현재 <b>영어1 · NE능률</b>만 레슨별 지문정리가 연결되어 있습니다. 나머지 출판사는 순차적으로 추가되며, 준비되면 <b>준비중</b> 표시가 <b>바로가기</b>로 바뀝니다.</p>
+  </div>
+
+</div>
+
+<footer class="footer">
+  © 2026 JANICE의 영어 관리 시스템 · Janice's English Learning Management System
+</footer>
+
+</body>
+</html>
